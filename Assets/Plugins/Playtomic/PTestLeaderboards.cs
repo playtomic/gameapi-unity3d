@@ -125,9 +125,9 @@ internal class PTestLeaderboards : PTest {
 		AssertTrue(section, "Received numscores", numscores > 0);
 		
 		if(scores.Count > 1) {
-			AssertTrue(section, "First score is less than second", scores[0].points > scores[1].points);
+			AssertTrue(section, "First score is greater than second", scores[0].points > scores[1].points);
 		} else {
-			AssertTrue(section, "First score is less than second forced failure", false);
+			AssertTrue(section, "First score is greater than second forced failure", false);
 		}
 		
 		done();
