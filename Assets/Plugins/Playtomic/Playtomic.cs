@@ -11,7 +11,7 @@ public class Playtomic : MonoBehaviour
 	private static Playtomic _instance = null;
 	
 	/// <summary>
-	/// Initializes the API.  You must do this before anything else.  Get your credentials from the Playtomic dashboard.
+	/// Initializes the API.  You must do this before anything else.
 	/// </summary>
 	/// <param name="publickey">
 	/// A <see cref="System.String"/>
