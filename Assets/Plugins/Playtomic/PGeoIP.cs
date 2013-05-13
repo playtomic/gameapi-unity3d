@@ -15,11 +15,6 @@ public class PGeoIP
 		Playtomic.API.StartCoroutine(SendRequest(SECTION, LOOKUP, callback));
 	}
 	
-	internal void Lookup(Action<PlayerCountry, PResponse, Action> callback, Action testcallback)
-	{
-		Playtomic.API.StartCoroutine(SendRequest(SECTION, LOOKUP, callback, testcallback));
-	}
-	
 	private IEnumerator SendRequest(string section, string action, Action<PlayerCountry, PResponse> callback)
 	{ 
 		var www = PRequest.Prepare (section, action);
@@ -28,15 +23,5 @@ public class PGeoIP
 		var response = PRequest.Process(www);
 		var data = response.success ? response.json : null;
 		callback(new PlayerCountry(data), response);
-	}
-	
-	private IEnumerator SendRequest(string section, string action, Action<PlayerCountry, PResponse, Action> callback, Action testcallback)
-	{ 
-		var www = PRequest.Prepare (section, action);
-		yield return www;
-		
-		var response = PRequest.Process(www);
-		var data = response.success ? response.json : null;
-		callback(new PlayerCountry(data), response, testcallback);
 	}
 }

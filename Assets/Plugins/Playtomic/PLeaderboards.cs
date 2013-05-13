@@ -21,11 +21,6 @@ public class PLeaderboards
 		Playtomic.API.StartCoroutine(SendSaveRequest(SECTION, SAVE, score, callback));
 	}
 	
-	internal void Save(PlayerScore score, Action<PResponse, Action> callback, Action testcallback)
-	{
-		Playtomic.API.StartCoroutine(SendSaveRequest(SECTION, SAVE, score, callback, testcallback));
-	}
-	
 	private IEnumerator SendSaveRequest(string section, string action, Hashtable postdata, Action<PResponse> callback)
 	{ 
 		var www = PRequest.Prepare (section, action, postdata);
@@ -33,15 +28,6 @@ public class PLeaderboards
 		
 		var response = PRequest.Process(www);
 		callback(response);
-	}
-	
-	private IEnumerator SendSaveRequest(string section, string action, Hashtable postdata, Action<PResponse, Action> callback, Action testcallback)
-	{ 
-		var www = PRequest.Prepare (section, action, postdata);
-		yield return www;
-		
-		var response = PRequest.Process(www);
-		callback(response, testcallback);
 	}
 	
 	/**
@@ -55,11 +41,6 @@ public class PLeaderboards
 		Playtomic.API.StartCoroutine(SendListRequest(SECTION, SAVEANDLIST, score, callback));
 	}
 	
-	public void SaveAndList(PlayerScore score, Action<List<PlayerScore>, int, PResponse, Action> callback, Action testcallback)
-	{
-		Playtomic.API.StartCoroutine(SendListRequest(SECTION, SAVEANDLIST, score, callback, testcallback));
-	}
-	
 	/**
 	 * Lists scores
 	 * @param	options	Hashtable	The listing options
@@ -68,11 +49,6 @@ public class PLeaderboards
 	public void List(Hashtable options, Action<List<PlayerScore>, int, PResponse> callback)
 	{	
 		Playtomic.API.StartCoroutine(SendListRequest(SECTION, LIST, options, callback));
-	}
-	
-	internal void List(Hashtable options, Action<List<PlayerScore>, int, PResponse, Action> callback, Action testcallback)
-	{	
-		Playtomic.API.StartCoroutine(SendListRequest(SECTION, LIST, options, callback, testcallback));
 	}
 	
 	private IEnumerator SendListRequest(string section, string action, Hashtable postdata, Action<List<PlayerScore>, int, PResponse> callback)
@@ -87,20 +63,6 @@ public class PLeaderboards
 		ProcessScores (response, data, out scores, out numscores);
 		
 		callback(scores, numscores, response);
-	}
-	
-	private IEnumerator SendListRequest(string section, string action, Hashtable postdata, Action<List<PlayerScore>, int, PResponse, Action> callback, Action testcallback)
-	{ 
-		var www = PRequest.Prepare (section, action, postdata);
-		yield return www;
-		
-		var response = PRequest.Process(www);
-		var data = response.json;
-		List<PlayerScore> scores;
-		int numscores;
-		ProcessScores (response, data, out scores, out numscores);
-		
-		callback(scores, numscores, response, testcallback);
 	}
 	
 	private void ProcessScores(PResponse response, Hashtable data, out List<PlayerScore> scores, out int numitems)
