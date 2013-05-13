@@ -1,50 +1,57 @@
 using UnityEngine;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 
-public class PTests : MonoBehaviour 
+//using Playtomic;
+
+//namespace PlaytomicTest
+//{
+public class PTests : MonoBehaviour
 {
-	private List<Action<Action>> tests;
-	
-	void Start() 
-	{
-		Playtomic.Initialize("testpublickey", "testprivatekey", "http://127.0.0.1:3000");
-		PTest.Setup ();	
-		PTestLeaderboards.rnd = PTestPlayerLevels.rnd = RND();
+	private List<Action<Action>> _tests;
 		
-		tests = new List<Action<Action>>();
-		tests.Add (PTestGameVars.All);
-		tests.Add (PTestGameVars.Single);
-		tests.Add (PTestGeoIP.Lookup);
-		tests.Add (PTestLeaderboards.FirstScore);
-		tests.Add (PTestLeaderboards.SecondScore);
-		tests.Add (PTestLeaderboards.HighScores);
-		tests.Add (PTestLeaderboards.LowScores);
-		tests.Add (PTestLeaderboards.AllScores);
-		tests.Add (PTestPlayerLevels.Create);
-		tests.Add (PTestPlayerLevels.List);
-		tests.Add (PTestPlayerLevels.Load);
-		tests.Add (PTestPlayerLevels.Rate);
+	public void Start ()
+	{
+		Playtomic.Initialize ("testpublickey", "testprivatekey", "http://127.0.0.1:3000");
+		PTest.Setup ();	
+		PTestLeaderboards.rnd = PTestPlayerLevels.rnd = RND ();
+			
+		_tests = new List<Action<Action>>
+			    {
+			        PTestGameVars.All,
+			        PTestGameVars.Single,
+			        PTestGeoIP.Lookup,
+			        PTestLeaderboards.FirstScore,
+			        PTestLeaderboards.SecondScore,
+			        PTestLeaderboards.HighScores,
+			        PTestLeaderboards.LowScores,
+			        PTestLeaderboards.AllScores,
+					PTestLeaderboards.FriendsScores,
+					PTestLeaderboards.OwnScores,
+			        PTestPlayerLevels.Create,
+			        PTestPlayerLevels.List,
+			        PTestPlayerLevels.Load,
+			        PTestPlayerLevels.Rate
+			    };
 		Next ();
 	}
-	
-	void Next()
+		
+	void Next ()
 	{
-		if(tests.Count == 0) {
+		if (_tests.Count == 0) {
 			PTest.Render ();
 			return;
 		}
-		
-		var action = tests[0];
-		action(Next);
-		
-		tests.RemoveAt(0);
+			
+		var action = _tests [0];
+		_tests.RemoveAt (0);
+		action (Next);
 	}
-	
-	private int RND()
+		
+	private static int RND ()
 	{
-		var random = new System.Random();
+		var random = new System.Random ();
 		return random.Next (int.MaxValue);
 	}
 }
+//};
