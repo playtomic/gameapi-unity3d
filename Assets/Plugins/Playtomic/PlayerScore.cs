@@ -101,6 +101,12 @@ public class PlayerScore : Hashtable
 		get { return this.ContainsKey ("allowduplicates"); }
 		set { SetProperty("allowduplicates", value); }
 	}	
+	
+	public long perpage
+	{
+		get { return GetLong ("perpage"); }
+		set { SetProperty ("perpage", value); }
+	}
 
 	private long GetLong(string s) 
 	{
