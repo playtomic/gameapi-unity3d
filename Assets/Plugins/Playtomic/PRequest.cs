@@ -28,6 +28,12 @@ internal class PRequest
 		{
 			postdata = new Hashtable();
 		}
+		else 
+		{
+			postdata.Remove ("publickey");
+			postdata.Remove ("section");
+			postdata.Remove ("action");
+		}
 		
 		postdata.Add ("publickey", PUBLICKEY);
 		postdata.Add ("section", section);
