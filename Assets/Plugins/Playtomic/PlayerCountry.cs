@@ -9,6 +9,10 @@ public class PlayerCountry
 	
 	public PlayerCountry(Hashtable data)
 	{
+		if(data == null) {
+			return;
+		}
+		
 		name = data.ContainsKey ("name") ? (string)data["name"] : null;
 		code = data.ContainsKey ("code") ? (string)data["code"] : null;
 	}
