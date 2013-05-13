@@ -1,5 +1,18 @@
+# Unity3D .gitignore file.
+# Store this file at the root of your local repository.
 .DS_Store
+Library/AssetImportState
+Library/AssetServerCacheV3
+Library/FailedAssetImports.txt
+Library/ScriptAssemblies
+Library/ScriptMapper
+Library/assetDatabase3
+Library/cache
+Library/expandedItems
+Library/metadata
+Library/previews
+Library/guidmapper
 Temp
-Library/cache/39/39027db843a6549e09bf2015a03e51f3
-
-Library/cache/39/39027db843a6549e09bf2015a03e51f3
+*.csproj
+*.pidb
+*.sln
