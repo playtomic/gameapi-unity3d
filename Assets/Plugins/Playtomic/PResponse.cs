@@ -46,78 +46,46 @@ public class PResponse
 			
 			switch(errorcode)
 			{
-				case -1:
-					return "No data was returned from the server.  We might be under heavy load or have broken stuff";
-					
-				case 1:
-					return "General error, usually connectivity or a glitch on the servers";
-				
-				case 2:
-					return "Invalid game credentials - make sure you get your details on the API settings page in the dashboard";
-					
-				case 3:
-					return "Request timed out.";
-					
-				case 4:
-					return "Invalid request.";
+			case 1:
+				return "General error, this typically means the player is unable to connect to the server.";
+			case 2:
+				return "Invalid game credentials. Make sure you use the right public and private keys.";
+			case 3:
+				return "Request timed out.";
+			case 4:
+				return "Invalid request.";
 
-				case 100:
-					return "GeoIP API has been disabled for your game.  This may happen in the first couple minutes till the tracker servers get updated that your game exists, or in very bad cases if your game is placing undue stress on our servers";
+			case 100:
+				return "GeoIP API has been disabled for this game.";
 					
-				case 200:
-					return "Leaderboard API has been disabled for your game.  This may happen in the first couple minutes till the tracker servers get updated that your game exists, or in very bad cases if your game is placing undue stress on our servers";
-					
-				case 201:
-					return "The source url or name weren't provided when saving the score.  Make sure the game is initialized, and the PPlayerScore has a Name";
-					
-				case 202:
-					return "Invalid auth key.  This usually will only happen if someone messes with the URL the scores save to";
-					
-				case 203:
-					return "No Facebook user id, on a Facebook score submission";
-				
-				case 204:
-					return "Table name wasn't specified for creating a private leaderboard.";
-	
-				case 205:
-					return "Permalink structure wasn't specified: http://website.com/game/whatever?leaderboard=";
-					
-				case 206:
-					return "Leaderboard id wasn't provided loading a private leaderboard.";
-					
-				case 207:
-					return "Invalid leaderboard id was provided for a private leaderboard.";
-				
-				case 208:
-					return "Player is banned from submitting scores in your game.";
-				
-				case 209:
-					return "Score was not the player's best score.  You can notify the player, or circumvent this by pecifying 'allowduplicates' to be true in your save options.";
+			case 200:
+				return "Leaderboard API has been disabled for this game.";
+			case 201:
+				return "The player's name wasn't provided.";
+			case 203:
+				return "Player is banned from submitting scores in this game.";
+			case 204:
+				return "Score was not saved because it was not the player's best.  You can allow players to have " +
+					"more than one score by specifying allowduplicates=true in your save options.";
 
-				case 300:
-					return "GameVars API has been disabled for your game.  This may happen in the first couple minutes till the tracker servers get updated that your game exists, or in very bad cases if your game is placing undue stress on our servers";
+			case 300:
+				return "GameVars API has been disabled for this game.";
 					
-				case 400:
-					return "Level sharing API has been disabled for your game.    This may happen in the first couple minutes till the tracker servers get updated that your game exists, or in very bad cases if your game is placing undue stress on our servers";
-					
-				case 401:
-					return "Invalid rating.  Ratings must be integers between 1 and 10";
-					
-				case 402:
-					return "Player already rated that level";
-					
-				case 403:
-					return "The level name was not provided when saving a level";
-				
-				case 404:
-					return "The level id was not provided";
-					
-				case 405:
-					return "That level already exists.";
-				
-				default:
-					return "Unknown error!";
+			case 400:
+				return "Level sharing API has been disabled for this game.";
+			case 401:
+				return "Invalid rating (must be 1 - 10)";
+			case 402:
+				return "Player has already rated that level";
+			case 403:
+				return "Missing level name";
+			case 404:
+				return "Missing level id";
+			case 405:
+				return "Level already exists";
 			}
+
+			return "Unknown error...";
 		}
 	}
 }
