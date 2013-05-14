@@ -242,7 +242,6 @@ internal class PTestLeaderboards : PTest
 		Debug.Log (section);
 		
 		var points = 0;
-		var saved = 0;
 		var submitted = 0;
 
 		for(var i=0; i<9; i++)
@@ -250,7 +249,6 @@ internal class PTestLeaderboards : PTest
 			Thread.Sleep (500);
 			
 			points += 1000;
-			saved++;
 
 			var score = new PlayerScore {
 				name = "test account",
