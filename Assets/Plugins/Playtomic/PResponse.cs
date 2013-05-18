@@ -83,6 +83,21 @@ public class PResponse
 				return "Missing level id";
 			case 405:
 				return "Level already exists";
+				
+			case 500:
+				return "Achievements API has been disabled for this game.";
+			case 501:
+				return "Missing playerid";
+			case 502:
+				return "Missing player name";
+			case 503:
+				return "Missing achievementid";
+			case 504:
+				return "Invalid achievementid or achievement key";
+			case 505:
+				return "Player already had the achievement.  You can overwrite old achievements with overwrite=true or save each time the player is awarded with allowduplicates=true";
+			case 506:
+				return "Player already had the achievement and it was overwritten or a duplicate was saved successfully";
 			}
 
 			return "Unknown error...";
