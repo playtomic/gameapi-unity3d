@@ -16,7 +16,6 @@ internal class PTestAchievements : PTest
 		var achievements = new List<PlayerAchievement>();
 		achievements.Add(new PlayerAchievement(
 			new Hashtable {
-				{"publickey", "testpublickey"},
 				{"achievement", "Super Mega Achievement #1"},
 				{"achievementkey", "secretkey"},
 				{"playerid", "1"},
@@ -27,7 +26,6 @@ internal class PTestAchievements : PTest
 		}));
 		achievements.Add(new PlayerAchievement(
 			new Hashtable {
-			{"publickey", "testpublickey"},
 			{"achievement", "Super Mega Achievement #1"},
 			{"achievementkey", "secretkey"},
 			{"playerid", "2"},
@@ -38,7 +36,6 @@ internal class PTestAchievements : PTest
 		}));
 		achievements.Add(new PlayerAchievement(
 			new Hashtable {
-			{"publickey", "testpublickey"},
 			{"achievement", "Super Mega Achievement #1"},
 			{"achievementkey", "secretkey"},
 			{"playerid", "3"},
@@ -49,7 +46,6 @@ internal class PTestAchievements : PTest
 		}));
 		achievements.Add(new PlayerAchievement(
 			new Hashtable {
-			{"publickey", "testpublickey"},
 			{"achievement", "Super Mega Achievement #2"},
 			{"achievementkey", "secretkey2"},
 			{"playerid", "3"},
@@ -60,7 +56,6 @@ internal class PTestAchievements : PTest
 		}));
 		achievements.Add(new PlayerAchievement(
 			new Hashtable {
-			{"publickey", "testpublickey"},
 			{"achievement", "Super Mega Achievement #2"},
 			{"achievementkey", "secretkey2"},
 			{"playerid", "2"},
@@ -73,7 +68,6 @@ internal class PTestAchievements : PTest
 		ListLoop (section, achievements, () => {
 
 			var options = new Hashtable {
-				{"publickey", "testpublickey"},
 				{"filters", new Hashtable { 
 					{"rnd", rnd }
 					}}
@@ -116,7 +110,6 @@ internal class PTestAchievements : PTest
 		Debug.Log (section);
 
 		var options = new Hashtable {
-			{"publickey", "testpublickey"},
 			{"friendslist", new ArrayList(new []{"1", "2", "3"})},
 			{"filters", new Hashtable { 
 				{"rnd", rnd }
@@ -149,7 +142,6 @@ internal class PTestAchievements : PTest
 		Debug.Log (section);
 
 		var options = new Hashtable {
-			{"publickey", "testpublickey"},
 			{"playerid", "1"},
 			{"filters", new Hashtable { 
 				{"rnd", rnd }
@@ -179,7 +171,6 @@ internal class PTestAchievements : PTest
 		Debug.Log (section);
 
 		var options = new Hashtable {
-			{"publickey", "testpublickey"},
 			{"playerid", "1"}, 
 			{"friendslist", new ArrayList(new [] { "2", "3"})},
 			{"filters", new Hashtable { 
@@ -216,7 +207,6 @@ internal class PTestAchievements : PTest
 		Debug.Log (section);
 
 		var options = new Hashtable {
-			{"publickey", "testpublickey"},
 			{"filters", new Hashtable { 
 				{"rnd", rnd }
 				}}
@@ -248,7 +238,6 @@ internal class PTestAchievements : PTest
 		Debug.Log (section);
 
 		var options = new Hashtable {
-			{"publickey", "testpublickey"},
 			{"group", true},
 			{"friendslist", new ArrayList(new [] {"2", "3"})},
 			{"filters", new Hashtable { 
@@ -277,7 +266,6 @@ internal class PTestAchievements : PTest
 		Debug.Log (section);
 
 		var options = new Hashtable {
-			{"publickey", "testpublickey"},
 			{"group", true},
 			{"playerid", "1"},
 			{"friendslist", new ArrayList(new [] { "2", "3" })},
@@ -310,7 +298,6 @@ internal class PTestAchievements : PTest
 		Debug.Log (section);
 
 		var achievement = new PlayerAchievement {
-			{"publickey", "testpublickey"},
 			{"achievement", "Super Mega Achievement #1"},
 			{"achievementkey", "secretkey"},
 			{"playerid", rnd.ToString()},
