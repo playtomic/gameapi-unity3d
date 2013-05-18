@@ -31,7 +31,15 @@ public class PTests : MonoBehaviour
 			        PTestPlayerLevels.Create,
 			        PTestPlayerLevels.List,
 			        PTestPlayerLevels.Load,
-			        PTestPlayerLevels.Rate
+			        PTestPlayerLevels.Rate,
+					PTestAchievements.List,
+					PTestAchievements.ListWithFriends,
+					PTestAchievements.ListWithPlayer,
+					PTestAchievements.ListWithPlayerAndFriends,
+					PTestAchievements.Stream,
+					PTestAchievements.StreamWithFriends,
+					PTestAchievements.StreamWithPlayerAndFriends,
+					PTestAchievements.Save
 			    };
 		Next ();
 	}

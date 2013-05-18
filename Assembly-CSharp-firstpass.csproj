@@ -44,6 +44,7 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Plugins\Playtomic\PAchievements.cs" />
      <Compile Include="Assets\Plugins\Playtomic\PEncode.cs" />
      <Compile Include="Assets\Plugins\Playtomic\PGameVars.cs" />
      <Compile Include="Assets\Plugins\Playtomic\PGeoIP.cs" />
@@ -53,11 +54,14 @@
      <Compile Include="Assets\Plugins\Playtomic\PRequest.cs" />
      <Compile Include="Assets\Plugins\Playtomic\PResponse.cs" />
      <Compile Include="Assets\Plugins\Playtomic\PTest.cs" />
+     <Compile Include="Assets\Plugins\Playtomic\PTestAchievements.cs" />
      <Compile Include="Assets\Plugins\Playtomic\PTestGameVars.cs" />
      <Compile Include="Assets\Plugins\Playtomic\PTestGeoIP.cs" />
      <Compile Include="Assets\Plugins\Playtomic\PTestLeaderboards.cs" />
      <Compile Include="Assets\Plugins\Playtomic\PTestPlayerLevels.cs" />
      <Compile Include="Assets\Plugins\Playtomic\PTests.cs" />
+     <Compile Include="Assets\Plugins\Playtomic\PlayerAchievement.cs" />
+     <Compile Include="Assets\Plugins\Playtomic\PlayerAward.cs" />
      <Compile Include="Assets\Plugins\Playtomic\PlayerCountry.cs" />
      <Compile Include="Assets\Plugins\Playtomic\PlayerLevel.cs" />
      <Compile Include="Assets\Plugins\Playtomic\PlayerScore.cs" />
