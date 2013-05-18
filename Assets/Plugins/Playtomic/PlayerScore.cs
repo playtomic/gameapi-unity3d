@@ -23,10 +23,10 @@ public class PlayerScore : Hashtable
 		}
 	}
 	
-	public string name 
+	public string playername 
 	{
-		get { return GetString ("name"); }
-		set { SetProperty("name", value); }
+		get { return GetString ("playername"); }
+		set { SetProperty("playername", value); }
 	}
 	
 	public string playerid
