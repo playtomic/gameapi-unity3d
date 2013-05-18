@@ -38,11 +38,11 @@ public class PlayerAward : Hashtable
 		get { return GetString ("playername"); }
 		set { SetProperty ("playername", value); }
 	}
-
-	public string achievementid
+	
+	public string source
 	{
-		get { return GetString ("achievementid"); }
-		set { SetProperty ("achievementid", value); }
+		get { return GetString ("source"); }
+		set { SetProperty ("source", value); }
 	}
 
 	public PlayerAchievement awarded
