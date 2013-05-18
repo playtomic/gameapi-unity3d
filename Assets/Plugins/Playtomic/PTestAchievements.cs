@@ -192,8 +192,8 @@ internal class PTestAchievements : PTest
 			AssertTrue(section, "Achievement 3 has no player", achievements[2].player == null);
 			AssertTrue(section, "Achievement 1 player", achievements[0].player.playername == "ben");
 			AssertTrue(section, "Achievement 1 has 2 friend", achievements[0].friends.Count == 2);
-			AssertTrue(section, "Achievement 1 friend 2", achievements[0].friends[0].playername == "michelle");
-			AssertTrue(section, "Achievement 1 friend 3", achievements[0].friends[1].playername == "peter");
+			AssertTrue(section, "Achievement 1 friend 1", achievements[0].friends[0].playername == "michelle");
+			AssertTrue(section, "Achievement 1 friend 2", achievements[0].friends[1].playername == "peter");
 			AssertTrue(section, "Achievement 2 has 2 friend", achievements[1].friends.Count == 2);
 			AssertTrue(section, "Achievement 2 friend 1", achievements[1].friends[0].playername == "michelle");
 			AssertTrue(section, "Achievement 2 friend 2", achievements[1].friends[1].playername == "peter");
@@ -217,16 +217,16 @@ internal class PTestAchievements : PTest
 			AssertEquals(section, "No errorcode", r.errorcode, 0);
 			AssertTrue(section, "5 achievements returned", achievements.Count == 5);
 			AssertTrue(section, "5 achievements in total", numachievements == 5);
-			AssertTrue(section, "Achievement 5 person", achievements[0].playername == "michelle");
-			AssertTrue(section, "Achievement 5 achievement", achievements[0].awarded.achievement == "Super Mega Achievement #2");
-			AssertTrue(section, "Achievement 4 person", achievements[1].playername == "peter");
-			AssertTrue(section, "Achievement 4 achievement", achievements[1].awarded.achievement == "Super Mega Achievement #2");
+			AssertTrue(section, "Achievement 1 person", achievements[0].playername == "michelle");
+			AssertTrue(section, "Achievement 1 achievement", achievements[0].awarded.achievement == "Super Mega Achievement #2");
+			AssertTrue(section, "Achievement 2 person", achievements[1].playername == "peter");
+			AssertTrue(section, "Achievement 2 achievement", achievements[1].awarded.achievement == "Super Mega Achievement #2");
 			AssertTrue(section, "Achievement 3 person", achievements[2].playername == "peter");
 			AssertTrue(section, "Achievement 3 achievement", achievements[2].awarded.achievement == "Super Mega Achievement #1");
-			AssertTrue(section, "Achievement 2 person", achievements[3].playername == "michelle");
-			AssertTrue(section, "Achievement 2 achievement", achievements[3].awarded.achievement == "Super Mega Achievement #1");					
-			AssertTrue(section, "Achievement 1 person", achievements[4].playername == "ben");
-			AssertTrue(section, "Achievement 1 achievement", achievements[4].awarded.achievement == "Super Mega Achievement #1");
+			AssertTrue(section, "Achievement 4 person", achievements[3].playername == "michelle");
+			AssertTrue(section, "Achievement 4 achievement", achievements[3].awarded.achievement == "Super Mega Achievement #1");					
+			AssertTrue(section, "Achievement 5 person", achievements[4].playername == "ben");
+			AssertTrue(section, "Achievement 5 achievement", achievements[4].awarded.achievement == "Super Mega Achievement #1");
 
 			done();
 		});
@@ -248,8 +248,8 @@ internal class PTestAchievements : PTest
 		Playtomic.Achievements.Stream(options, (achievements, numachievements, r) => {
 			AssertTrue(section, "Request succeeded", r.success);
 			AssertEquals(section, "No errorcode", r.errorcode, 0);
-			AssertTrue(section, "5 achievements returned", achievements.Count == 2);
-			AssertTrue(section, "5 achievements in total", numachievements == 2);
+			AssertTrue(section, "2 achievements returned", achievements.Count == 2);
+			AssertTrue(section, "2 achievements in total", numachievements == 2);
 			AssertTrue(section, "Achievement 1 awards", achievements[0].awards == 2);
 			AssertTrue(section, "Achievement 1 achievement", achievements[0].awarded.achievement == "Super Mega Achievement #2");
 			AssertTrue(section, "Achievement 1 person", achievements[0].playername == "michelle");
@@ -277,8 +277,8 @@ internal class PTestAchievements : PTest
 		Playtomic.Achievements.Stream(options, (achievements, numachievements, r) => {
 			AssertTrue(section, "Request succeeded", r.success);
 			AssertEquals(section, "No errorcode", r.errorcode, 0);
-			AssertTrue(section, "5 achievements returned", achievements.Count == 3);
-			AssertTrue(section, "5 achievements in total", numachievements == 3);
+			AssertTrue(section, "3 achievements returned", achievements.Count == 3);
+			AssertTrue(section, "3 achievements in total", numachievements == 3);
 			AssertTrue(section, "Achievement 1 person", achievements[0].playername == "michelle");
 			AssertTrue(section, "Achievement 1 awards", achievements[0].awards == 2);
 			AssertTrue(section, "Achievement 1 achievement", achievements[0].awarded.achievement == "Super Mega Achievement #2");

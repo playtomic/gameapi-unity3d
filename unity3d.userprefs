@@ -5,13 +5,13 @@
       <File FileName="Assets/Plugins/Playtomic/PlayerLevel.cs" Line="1" Column="1" />
       <File FileName="Assets/Plugins/Playtomic/PlayerScore.cs" Line="1" Column="1" />
       <File FileName="Assets/Plugins/Playtomic/PlayerAchievement.cs" Line="1" Column="1" />
-      <File FileName="Assets/Plugins/Playtomic/PlayerAward.cs" Line="47" Column="1" />
+      <File FileName="Assets/Plugins/Playtomic/PlayerAward.cs" Line="1" Column="1" />
       <File FileName="Assets/Plugins/Playtomic/PAchievements.cs" Line="1" Column="1" />
       <File FileName="Assets/Plugins/Playtomic/PGameVars.cs" Line="1" Column="1" />
       <File FileName="Assets/Plugins/Playtomic/PLeaderboards.cs" Line="1" Column="1" />
       <File FileName="Assets/Plugins/Playtomic/Playtomic.cs" Line="1" Column="1" />
       <File FileName="Assets/Plugins/Playtomic/PTestLeaderboards.cs" Line="1" Column="1" />
-      <File FileName="Assets/Plugins/Playtomic/PTestAchievements.cs" Line="1" Column="1" />
+      <File FileName="Assets/Plugins/Playtomic/PTestAchievements.cs" Line="300" Column="44" />
       <File FileName="Assets/Plugins/Playtomic/PTests.cs" Line="1" Column="1" />
       <File FileName="Assets/Plugins/Playtomic/PTestGameVars.cs" Line="1" Column="1" />
       <File FileName="Assets/Plugins/Playtomic/PTest.cs" Line="1" Column="1" />
