@@ -14,7 +14,7 @@ public class PTests : MonoBehaviour
 	{
 		Playtomic.Initialize ("testpublickey", "testprivatekey", "http://127.0.0.1:3000");
 		PTest.Setup ();	
-		PTestLeaderboards.rnd = PTestPlayerLevels.rnd = RND ();
+		PTestLeaderboards.rnd = PTestPlayerLevels.rnd = PTestAchievements.rnd = RND ();
 			
 		_tests = new List<Action<Action>>
 			    {
