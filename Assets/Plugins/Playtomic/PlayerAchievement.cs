@@ -13,14 +13,7 @@ public class PlayerAchievement : Hashtable
 	public PlayerAchievement(Hashtable data)
 	{
 		foreach(string x in data.Keys)
-		{			
-			if(x == "date") 
-			{
-				var d = new DateTime(1970, 1, 1, 0, 0, 0);
-				date = d.AddSeconds ((double)data[x]);
-				continue;
-			} 
-
+		{
 			if (x == "player") {
 				player = new PlayerAward ((Hashtable)data["player"]);
 				continue;
