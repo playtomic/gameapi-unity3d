@@ -21,6 +21,7 @@ public class PTests : MonoBehaviour
 			        PTestGameVars.All,
 			        PTestGameVars.Single,
 			        PTestGeoIP.Lookup,
+					PTestNewsletter.Subscribe,
 			        PTestLeaderboards.FirstScore,
 			        PTestLeaderboards.SecondScore,
 			        PTestLeaderboards.HighScores,

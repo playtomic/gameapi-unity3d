@@ -8,6 +8,7 @@ public class Playtomic : MonoBehaviour
 	private PGeoIP _geoip;
 	private PGameVars _gamevars;
 	private PAchievements _achievements;
+	private PNewsletter _newsletter;
 	
 	private static Playtomic _instance = null;
 	
@@ -37,6 +38,7 @@ public class Playtomic : MonoBehaviour
 		_instance._geoip = new PGeoIP();
 		_instance._gamevars = new PGameVars();
 		_instance._achievements = new PAchievements();
+		_instance._newsletter = new PNewsletter();
 		
 		PRequest.Initialise(publickey, privatekey, apiurl);
 	}
@@ -69,5 +71,10 @@ public class Playtomic : MonoBehaviour
 	public static PAchievements Achievements
 	{
 		get { return _instance._achievements; }
+	}
+	
+	public static PNewsletter Newsletter
+	{
+		get { return _instance._newsletter; }
 	}
 }
