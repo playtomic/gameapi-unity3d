@@ -248,7 +248,7 @@ internal class PTestLeaderboards : PTest
 				playername = "test account",
 				playerid = "test@testuri.com",
 				table = "personal" + rnd,
-				points = 3000,
+				points = 2500,
 				highest = true,
 				allowduplicates = true,
 				fields = {
@@ -271,7 +271,8 @@ internal class PTestLeaderboards : PTest
 				AssertTrue (section, "Score 5 ranked 10", scores [4].rank == 10);
 				AssertTrue (section, "Score 1 points", scores [0].points == 4000);
 				AssertTrue (section, "Score 2 points", scores [1].points == 3000);
-				AssertTrue (section, "Score 3 points", scores [2].points == 3000);
+				AssertTrue (section, "Score 3 points", scores [2].points == 2500);
+				AssertTrue (section, "Score 3 submitted", scores [2].submitted);
 				AssertTrue (section, "Score 4 points", scores [3].points == 2000);
 				AssertTrue (section, "Score 5 points", scores [4].points == 1000);
 				done ();
