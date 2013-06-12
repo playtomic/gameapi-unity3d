@@ -76,10 +76,22 @@ public class PlayerScore : Hashtable
 		set { SetProperty ("fields", value); }
 	}
 
+	public Hashtable filters
+	{
+		get { return ContainsKey ("filters") ? (Hashtable)this["filters"] : new Hashtable();	}
+		set { SetProperty ("filters", value); }
+	}
+	
 	public bool highest
 	{
 		get { return ContainsKey ("highest") && (bool) this["highest"]; }
 		set { SetProperty("highest", value); }
+	}
+	
+	public bool submitted
+	{
+		get { return ContainsKey ("submitted") && (bool) this["submitted"]; }
+		set { SetProperty("submitted", value); }
 	}
 
 	public bool lowest
