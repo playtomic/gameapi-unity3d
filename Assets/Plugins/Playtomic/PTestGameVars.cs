@@ -1,6 +1,6 @@
 using UnityEngine;
 using System;
-using System.Collections;
+using System.Collections.Generic;
 
 //namespace PlaytomicTest
 //{
@@ -13,7 +13,7 @@ internal class PTestGameVars : PTest
 		Debug.Log (section);
 		
 		Playtomic.GameVars.Load ((gv, r) => {
-			gv = gv ?? new Hashtable ();
+			gv = gv ?? new Dictionary<string,object> ();
 			AssertTrue (section, "Request succeeded", r.success);
 			AssertEquals (section, "No errorcode", r.errorcode, 0);
 			AssertTrue (section, "Has known testvar1", gv.ContainsKey ("testvar1"));
@@ -32,7 +32,7 @@ internal class PTestGameVars : PTest
 		Debug.Log (section);
 		
 		Playtomic.GameVars.LoadSingle ("testvar1", (gv, r) => {
-			gv = gv ?? new Hashtable ();
+			gv = gv ?? new Dictionary<string,object> ();
 			AssertTrue (section, "Request succeeded", r.success);
 			AssertEquals (section, "No errorcode", r.errorcode, 0);
 			AssertTrue (section, "Has testvar1", gv.ContainsKey ("testvar1"));

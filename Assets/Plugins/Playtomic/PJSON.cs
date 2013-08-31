@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 
@@ -10,7 +11,7 @@ using System.Text;
 	/// This class encodes and decodes PJSON strings.
 	/// Spec. details, see http://www.json.org/
 	/// 
-	/// PJSON uses Arrays and Objects. These correspond here to the datatypes ArrayList and Hashtable.
+	/// PJSON uses Arrays and Objects. These correspond here to the datatypes ArrayList and Dictionary<string,object>.
 	/// All numbers are parsed to doubles.
 	/// </summary>
 	internal class PJSON
@@ -42,7 +43,7 @@ using System.Text;
 		/// Parses the string json into a value
 		/// </summary>
 		/// <param name="json">A PJSON string.</param>
-		/// <returns>An ArrayList, a Hashtable, a double, a string, null, true, or false</returns>
+		/// <returns>An ArrayList, a Dictionary<string,object>, a double, a string, null, true, or false</returns>
 		public static object JsonDecode(string json)
 		{
 			// save the string for debug information
@@ -65,9 +66,9 @@ using System.Text;
 		}
 
 		/// <summary>
-		/// Converts a Hashtable / ArrayList object into a PJSON string
+		/// Converts a Dictionary<string,object> / ArrayList object into a PJSON string
 		/// </summary>
-		/// <param name="json">A Hashtable / ArrayList</param>
+		/// <param name="json">A Dictionary<string,object> / ArrayList</param>
 		/// <returns>A PJSON encoded string, or null if object 'json' is not serializable</returns>
 		public static string JsonEncode(object json)
 		{
@@ -117,9 +118,9 @@ using System.Text;
 			}
 		}
 
-		protected Hashtable ParseObject(char[] json, ref int index)
+		protected Dictionary<string,object> ParseObject(char[] json, ref int index)
 		{
-			Hashtable table = new Hashtable();
+			Dictionary<string,object> table = new Dictionary<string,object>();
 			int token;
 
 			// {
@@ -407,8 +408,8 @@ using System.Text;
 
 		protected bool SerializeObjectOrArray(object objectOrArray, StringBuilder builder)
 		{
-			if (objectOrArray is Hashtable) {
-				return SerializeObject((Hashtable)objectOrArray, builder);
+			if (objectOrArray is Dictionary<string,object>) {
+				return SerializeObject((Dictionary<string,object>)objectOrArray, builder);
 			} else if (objectOrArray is ArrayList) {
 				return SerializeArray((ArrayList)objectOrArray, builder);
 			} else {
@@ -416,7 +417,7 @@ using System.Text;
 			}
 		}
 
-		protected bool SerializeObject(Hashtable anObject, StringBuilder builder)
+		protected bool SerializeObject(Dictionary<string,object> anObject, StringBuilder builder)
 		{
 			builder.Append("{");
 
@@ -470,8 +471,8 @@ using System.Text;
 		{
 			if (value is string) {
 				SerializeString((string)value, builder);
-			} else if (value is Hashtable) {
-				SerializeObject((Hashtable)value, builder);
+			} else if (value is Dictionary<string,object>) {
+				SerializeObject((Dictionary<string,object>)value, builder);
 			} else if (value is ArrayList) {
 				SerializeArray((ArrayList)value, builder);
 			} else if (IsNumeric(value)) {

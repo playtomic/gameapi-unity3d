@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 
 public class PNewsletter
 {
@@ -8,15 +9,15 @@ public class PNewsletter
 
 	/**
 	 * Subscribes a person to your newsletter 
-	 * @param	options	Hashtable	The email and other information
+	 * @param	options	Dictionary<string,object>	The email and other information
 	 * @param	callback	Action<PResponse>	Your callback function
 	 */
-	public void Subscribe(Hashtable options, Action<PResponse> callback)
+	public void Subscribe(Dictionary<string,object> options, Action<PResponse> callback)
 	{
 		Playtomic.API.StartCoroutine(SendRequest(SECTION, SUBSCRIBE, callback, options));
 	}
 			
-	private IEnumerator SendRequest(string section, string action, Action<PResponse> callback, Hashtable options)
+	private IEnumerator SendRequest(string section, string action, Action<PResponse> callback, Dictionary<string,object> options)
 	{ 
 		var www = PRequest.Prepare (section, action, options);
 		yield return www;

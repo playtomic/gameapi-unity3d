@@ -22,11 +22,11 @@ internal class PRequest
 		PUBLICKEY = publickey;
 	}
 	
-	public static WWW Prepare(string section, string action, Hashtable postdata = null)
+	public static WWW Prepare(string section, string action, Dictionary<string,object> postdata = null)
 	{
 		if(postdata == null)
 		{
-			postdata = new Hashtable();
+			postdata = new Dictionary<string,object>();
 		}
 		else 
 		{
@@ -59,7 +59,7 @@ internal class PRequest
 		if (string.IsNullOrEmpty(www.text))
 			return PResponse.Error(1);
 		
-		var results = (Hashtable)PJSON.JsonDecode(www.text);
+		var results = (Dictionary<string,object>)PJSON.JsonDecode(www.text);
 		
 		if(!results.ContainsKey("success") || !results.ContainsKey("errorcode"))
 			return PResponse.GeneralError(1);

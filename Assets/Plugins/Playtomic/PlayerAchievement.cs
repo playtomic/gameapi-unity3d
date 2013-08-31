@@ -3,26 +3,26 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-public class PlayerAchievement : Hashtable
+public class PlayerAchievement : Dictionary<string,object>
 {
 	public PlayerAchievement ()
 	{
 
 	}
 
-	public PlayerAchievement(Hashtable data)
+	public PlayerAchievement(Dictionary<string,object> data)
 	{
 		foreach(string x in data.Keys)
 		{
 			if (x == "player") {
-				player = new PlayerAward ((Hashtable)data["player"]);
+				player = new PlayerAward ((Dictionary<string,object>)data["player"]);
 				continue;
 			}
 
 			if( x == "friends") {
 				var frarr = (ArrayList)data [x];
 				var fawards = new List<PlayerAward> ();
-				fawards.AddRange(from object t in frarr select new PlayerAward((Hashtable) t));
+				fawards.AddRange(from object t in frarr select new PlayerAward((Dictionary<string,object>) t));
 				friends = fawards;
 				continue;
 			}
@@ -61,9 +61,9 @@ public class PlayerAchievement : Hashtable
 		set { SetProperty ("playername", value); }
 	}
 
-	public Hashtable fields
+	public Dictionary<string,object> fields
 	{
-		get { return ContainsKey ("fields") ? (Hashtable)this["fields"] : new Hashtable();	}
+		get { return ContainsKey ("fields") ? (Dictionary<string,object>)this["fields"] : new Dictionary<string,object>();	}
 		set { SetProperty ("fields", value); }
 	}
 

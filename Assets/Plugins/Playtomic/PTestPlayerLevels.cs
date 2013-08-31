@@ -22,7 +22,7 @@ internal class PTestPlayerLevels : PTest
 				playername = "ben" + rnd,
 				playerid = "0",
 				data = "this is the level data",
-				fields = new Hashtable {
+				fields = new Dictionary<string,object> {
 					{"rnd", rnd}
 				}
 			};
@@ -48,11 +48,11 @@ internal class PTestPlayerLevels : PTest
 		const string section = "PTestPlaytomic.PlayerLevels.List";
 		Debug.Log(section);
 
-		var listoptions = new Hashtable { 
+		var listoptions = new Dictionary<string,object> { 
 				{"page", 1},
 				{"perpage", 10},
 				{"data", false},
-				{"filters", new Hashtable {
+				{"filters", new Dictionary<string,object> {
 						{"rnd", rnd}
 					}
 				}
@@ -105,7 +105,7 @@ internal class PTestPlayerLevels : PTest
 				playername = "ben" + rnd,
 				playerid = "0",
 				data = "this is the level data",
-				fields = new Hashtable {
+				fields = new Dictionary<string,object> {
 					{"rnd", rnd}
 				}
 			};
@@ -150,7 +150,7 @@ internal class PTestPlayerLevels : PTest
 				playername = "ben" + rnd,
 				playerid = rnd.ToString (CultureInfo.InvariantCulture),
 				data = "this is the level data",
-				fields = new Hashtable {
+				fields = new Dictionary<string,object> {
 					{"rnd", rnd}
 				}
 			};

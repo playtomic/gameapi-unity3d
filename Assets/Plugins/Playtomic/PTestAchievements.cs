@@ -15,60 +15,60 @@ internal class PTestAchievements : PTest
 
 		var achievements = new List<PlayerAchievement>();
 		achievements.Add(new PlayerAchievement(
-			new Hashtable {
+			new Dictionary<string,object> {
 				{"achievement", "Super Mega Achievement #1"},
 				{"achievementkey", "secretkey"},
 				{"playerid", "1"},
 				{"playername", "ben"},
-				{"fields", new Hashtable { 
+				{"fields", new Dictionary<string,object> { 
 					{"rnd", rnd}
 					}}
 		}));
 		achievements.Add(new PlayerAchievement(
-			new Hashtable {
+			new Dictionary<string,object> {
 			{"achievement", "Super Mega Achievement #1"},
 			{"achievementkey", "secretkey"},
 			{"playerid", "2"},
 			{"playername", "michelle"},
-			{"fields", new Hashtable { 
+			{"fields", new Dictionary<string,object> { 
 				{"rnd", rnd}
 				}}
 		}));
 		achievements.Add(new PlayerAchievement(
-			new Hashtable {
+			new Dictionary<string,object> {
 			{"achievement", "Super Mega Achievement #1"},
 			{"achievementkey", "secretkey"},
 			{"playerid", "3"},
 			{"playername", "peter"},
-			{"fields", new Hashtable { 
+			{"fields", new Dictionary<string,object> { 
 				{"rnd", rnd}
 				}}
 		}));
 		achievements.Add(new PlayerAchievement(
-			new Hashtable {
+			new Dictionary<string,object> {
 			{"achievement", "Super Mega Achievement #2"},
 			{"achievementkey", "secretkey2"},
 			{"playerid", "3"},
 			{"playername", "peter"},
-			{"fields", new Hashtable { 
+			{"fields", new Dictionary<string,object> { 
 				{"rnd", rnd}
 				}}
 		}));
 		achievements.Add(new PlayerAchievement(
-			new Hashtable {
+			new Dictionary<string,object> {
 			{"achievement", "Super Mega Achievement #2"},
 			{"achievementkey", "secretkey2"},
 			{"playerid", "2"},
 			{"playername", "michelle"},
-			{"fields", new Hashtable { 
+			{"fields", new Dictionary<string,object> { 
 				{"rnd", rnd}
 				}}
 		}));
 
 		ListLoop (section, achievements, () => {
 
-			var options = new Hashtable {
-				{"filters", new Hashtable { 
+			var options = new Dictionary<string,object> {
+				{"filters", new Dictionary<string,object> { 
 					{"rnd", rnd }
 					}}
 			};
@@ -109,9 +109,9 @@ internal class PTestAchievements : PTest
 		const string section = "PTestAchievements.ListWithFriends";
 		Debug.Log (section);
 
-		var options = new Hashtable {
+		var options = new Dictionary<string,object> {
 			{"friendslist", new ArrayList(new []{"1", "2", "3"})},
-			{"filters", new Hashtable { 
+			{"filters", new Dictionary<string,object> { 
 				{"rnd", rnd }
 				}}
 		};
@@ -141,9 +141,9 @@ internal class PTestAchievements : PTest
 		const string section = "PTestAchievements.ListWithPlayer";
 		Debug.Log (section);
 
-		var options = new Hashtable {
+		var options = new Dictionary<string,object> {
 			{"playerid", "1"},
-			{"filters", new Hashtable { 
+			{"filters", new Dictionary<string,object> { 
 				{"rnd", rnd }
 				}}
 		};
@@ -170,10 +170,10 @@ internal class PTestAchievements : PTest
 		const string section = "PTestAchievements.ListWithPlayerAndFriends";
 		Debug.Log (section);
 
-		var options = new Hashtable {
+		var options = new Dictionary<string,object> {
 			{"playerid", "1"}, 
 			{"friendslist", new ArrayList(new [] { "2", "3"})},
-			{"filters", new Hashtable { 
+			{"filters", new Dictionary<string,object> { 
 				{"rnd", rnd }
 				}}
 		};
@@ -206,8 +206,8 @@ internal class PTestAchievements : PTest
 		const string section = "PTestAchievements.Stream";
 		Debug.Log (section);
 
-		var options = new Hashtable {
-			{"filters", new Hashtable { 
+		var options = new Dictionary<string,object> {
+			{"filters", new Dictionary<string,object> { 
 				{"rnd", rnd }
 				}}
 		};
@@ -237,10 +237,10 @@ internal class PTestAchievements : PTest
 		const string section = "PTestAchievements.StreamWithFriends";
 		Debug.Log (section);
 
-		var options = new Hashtable {
+		var options = new Dictionary<string,object> {
 			{"group", true},
 			{"friendslist", new ArrayList(new [] {"2", "3"})},
-			{"filters", new Hashtable { 
+			{"filters", new Dictionary<string,object> { 
 				{"rnd", rnd }
 				}}
 		};
@@ -265,11 +265,11 @@ internal class PTestAchievements : PTest
 		const string section = "PTestAchievements.StreamWithPlayerAndFriends";
 		Debug.Log (section);
 
-		var options = new Hashtable {
+		var options = new Dictionary<string,object> {
 			{"group", true},
 			{"playerid", "1"},
 			{"friendslist", new ArrayList(new [] { "2", "3" })},
-			{"filters", new Hashtable { 
+			{"filters", new Dictionary<string,object> { 
 				{"rnd", rnd }
 				}}
 		};
@@ -302,7 +302,7 @@ internal class PTestAchievements : PTest
 			{"achievementkey", "secretkey"},
 			{"playerid", rnd.ToString()},
 			{"playername", "a random name " + rnd},
-			{"fields", new Hashtable {
+			{"fields", new Dictionary<string,object> {
 				{"rnd", rnd }
 				}}
 		};

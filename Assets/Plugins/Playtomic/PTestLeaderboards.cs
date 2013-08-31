@@ -18,7 +18,7 @@ internal class PTestLeaderboards : PTest
 			playername = "person1",
 			points = 10000,
 			highest =  true,
-			fields = new Hashtable { 
+			fields = new Dictionary<string,object> { 
 				{"rnd", rnd}
 			}
 		};
@@ -67,7 +67,7 @@ internal class PTestLeaderboards : PTest
 			points = 20000,
 			allowduplicates = true,
 			highest =  true,
-			fields = new Hashtable { 
+			fields = new Dictionary<string,object> { 
 				{"rnd", rnd}
 			}
 		};
@@ -85,11 +85,11 @@ internal class PTestLeaderboards : PTest
 		const string section = "TestLeaderboards.Highscores";
 		Debug.Log (section);
 
-		var options = new Hashtable
+		var options = new Dictionary<string,object>
 		{
 			{"table", "scores" + rnd},
 			{"highest", true},
-			{"filters", new Hashtable
+			{"filters", new Dictionary<string,object>
 				{
 					{"rnd", rnd}
 				}
@@ -119,12 +119,12 @@ internal class PTestLeaderboards : PTest
 		const string section = "TestLeaderboards.LowScores";
 		Debug.Log (section);
 
-		var options = new Hashtable
+		var options = new Dictionary<string,object>
 		{
 			{"table", "scores" + rnd},
 			{"lowest", true},
 			{"perpage", 2},
-			{"filters", new Hashtable
+			{"filters", new Dictionary<string,object>
 				{
 					{"rnd", rnd}
 				}
@@ -153,7 +153,7 @@ internal class PTestLeaderboards : PTest
 		const string section = "TestLeaderboards.AllScores";
 		Debug.Log (section);
 
-		var options = new Hashtable
+		var options = new Dictionary<string,object>
 		{
 			{"table", "scores" + rnd},
 			{"mode", "newest"},
@@ -186,7 +186,7 @@ internal class PTestLeaderboards : PTest
 
 		FriendsScoresLoop (playerids, 0, () => {
 
-			var list = new Hashtable {
+			var list = new Dictionary<string,object> {
 				{"table", "friends" + rnd},
 				{"perpage", 3},
 				{"friendslist", new ArrayList(new [] {"1", "2", "3" })}

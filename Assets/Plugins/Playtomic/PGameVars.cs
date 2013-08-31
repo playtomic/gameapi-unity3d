@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 
 public class PGameVars
 {
@@ -11,7 +12,7 @@ public class PGameVars
 	/**
 	 * Loads all GameVars
 	 */
-	public void Load(Action<Hashtable, PResponse> callback)
+	public void Load(Action<Dictionary<string,object>, PResponse> callback)
 	{
 		Playtomic.API.StartCoroutine(SendRequest(SECTION, LOAD, callback));
 	}
@@ -20,9 +21,9 @@ public class PGameVars
 	 * Loads a single GameVar
 	 * @param	name	string	The variable name to load
 	 */
-	public void LoadSingle(string name, Action<Hashtable, PResponse> callback)
+	public void LoadSingle(string name, Action<Dictionary<string,object>, PResponse> callback)
 	{
-		var postdata = new Hashtable
+		var postdata = new Dictionary<string,object>
 		{
 			{"name", name}
 		};
@@ -30,7 +31,7 @@ public class PGameVars
 		Playtomic.API.StartCoroutine(SendRequest(SECTION, LOADSINGLE, callback, postdata));
 	}
 	
-	internal IEnumerator SendRequest(string section, string action, Action<Hashtable, PResponse> callback, Hashtable postdata = null)
+	internal IEnumerator SendRequest(string section, string action, Action<Dictionary<string,object>, PResponse> callback, Dictionary<string,object> postdata = null)
 	{ 
 		var www = PRequest.Prepare (section, action, postdata);
 		yield return www;

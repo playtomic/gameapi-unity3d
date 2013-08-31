@@ -7,7 +7,7 @@ public class PResponse
 	public bool success;
 	public int errorcode;
 	public string overridemessage;
-	internal Hashtable json;
+	internal Dictionary<string,object> json;
 	
 	public static PResponse GeneralError(string message)
 	{

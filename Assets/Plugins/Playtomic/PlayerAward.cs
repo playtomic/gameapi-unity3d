@@ -1,13 +1,13 @@
 using System;
-using System.Collections;
+using System.Collections.Generic;
 
-public class PlayerAward : Hashtable
+public class PlayerAward : Dictionary<string,object>
 {
 	public PlayerAward ()
 	{
 	}
 
-	public PlayerAward(Hashtable data)
+	public PlayerAward(Dictionary<string,object> data)
 	{
 		foreach(string x in data.Keys)
 		{			
@@ -19,7 +19,7 @@ public class PlayerAward : Hashtable
 			} 
 
 			if(x == "awarded") {
-				awarded = new PlayerAchievement ((Hashtable) data[x]);
+				awarded = new PlayerAchievement ((Dictionary<string,object>) data[x]);
 				continue;
 			}
 
@@ -68,9 +68,9 @@ public class PlayerAward : Hashtable
 		get { return GetString ("rdate"); }
 	}
 
-	public Hashtable fields
+	public Dictionary<string,object> fields
 	{
-		get { return ContainsKey ("fields") ? (Hashtable)this["fields"] : new Hashtable();	}
+		get { return ContainsKey ("fields") ? (Dictionary<string,object>)this["fields"] : new Dictionary<string,object>();	}
 		set { SetProperty ("fields", value); }
 	}
 

@@ -1,7 +1,8 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 
-public class PlayerScore : Hashtable
+public class PlayerScore : Dictionary<string,object>
 {
 	public PlayerScore()
 	{
@@ -70,15 +71,15 @@ public class PlayerScore : Hashtable
 		get { return GetString ("rdate"); }
 	}
 
-	public Hashtable fields
+	public Dictionary<string,object> fields
 	{
-		get { return ContainsKey ("fields") ? (Hashtable)this["fields"] : new Hashtable();	}
+		get { return ContainsKey ("fields") ? (Dictionary<string,object>)this["fields"] : new Dictionary<string,object>();	}
 		set { SetProperty ("fields", value); }
 	}
 
-	public Hashtable filters
+	public Dictionary<string,object> filters
 	{
-		get { return ContainsKey ("filters") ? (Hashtable)this["filters"] : new Hashtable();	}
+		get { return ContainsKey ("filters") ? (Dictionary<string,object>)this["filters"] : new Dictionary<string,object>();	}
 		set { SetProperty ("filters", value); }
 	}
 	

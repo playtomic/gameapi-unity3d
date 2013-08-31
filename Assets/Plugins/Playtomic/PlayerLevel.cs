@@ -1,7 +1,8 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 
-public class PlayerLevel : Hashtable
+public class PlayerLevel : Dictionary<string,object>
 {
 	public PlayerLevel()
 	{
@@ -94,9 +95,9 @@ public class PlayerLevel : Hashtable
 		get { return GetString ("rdate"); }
 	}
 	
-	public Hashtable fields
+	public Dictionary<string,object> fields
 	{
-		get { return ContainsKey ("fields") ? (Hashtable)this["fields"] : new Hashtable();	}
+		get { return ContainsKey ("fields") ? (Dictionary<string,object>)this["fields"] : new Dictionary<string,object>();	}
 		set { SetProperty ("fields", value); }
 	}
 		

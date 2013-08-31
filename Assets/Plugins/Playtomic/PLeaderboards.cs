@@ -21,7 +21,7 @@ public class PLeaderboards
 		Playtomic.API.StartCoroutine(SendSaveRequest(SECTION, SAVE, score, callback));
 	}
 	
-	private IEnumerator SendSaveRequest(string section, string action, Hashtable postdata, Action<PResponse> callback)
+	private IEnumerator SendSaveRequest(string section, string action, Dictionary<string,object> postdata, Action<PResponse> callback)
 	{ 
 		var www = PRequest.Prepare (section, action, postdata);
 		yield return www;
@@ -43,15 +43,15 @@ public class PLeaderboards
 	
 	/**
 	 * Lists scores
-	 * @param	options	Hashtable	The listing options
+	 * @param	options	Dictionary<string,object>	The listing options
 	 * @param	callback	Action<List<PlayerScore>, int, PResponse>	Your callback function
 	 */
-	public void List(Hashtable options, Action<List<PlayerScore>, int, PResponse> callback)
+	public void List(Dictionary<string,object> options, Action<List<PlayerScore>, int, PResponse> callback)
 	{	
 		Playtomic.API.StartCoroutine(SendListRequest(SECTION, LIST, options, callback));
 	}
 	
-	private IEnumerator SendListRequest(string section, string action, Hashtable postdata, Action<List<PlayerScore>, int, PResponse> callback)
+	private IEnumerator SendListRequest(string section, string action, Dictionary<string,object> postdata, Action<List<PlayerScore>, int, PResponse> callback)
 	{ 
 		var www = PRequest.Prepare (section, action, postdata);
 		yield return www;
@@ -65,7 +65,7 @@ public class PLeaderboards
 		callback(scores, numscores, response);
 	}
 	
-	private void ProcessScores(PResponse response, Hashtable data, out List<PlayerScore> scores, out int numitems)
+	private void ProcessScores(PResponse response, Dictionary<string,object> data, out List<PlayerScore> scores, out int numitems)
 	{
 		scores = new List<PlayerScore>();
 		numitems = 0;
@@ -77,7 +77,7 @@ public class PLeaderboards
 			
 			for(var i=0; i<scorearr.Count; i++)
 			{
-				scores.Add(new PlayerScore((Hashtable) scorearr[i]));
+				scores.Add(new PlayerScore((Dictionary<string,object>) scorearr[i]));
 			}
 		}
 	}

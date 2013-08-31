@@ -1,5 +1,5 @@
 using System;
-using System.Collections;
+using System.Collections.Generic;
 
 public class PlayerCountry
 {
@@ -7,7 +7,7 @@ public class PlayerCountry
 	{
 	}
 	
-	public PlayerCountry(Hashtable data)
+	public PlayerCountry(Dictionary<string,object> data)
 	{
 		if(data == null) {
 			return;
