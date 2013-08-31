@@ -2,11 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-public class PlayerScore : Dictionary<string,object>
+public class PlayerScore : PDictionary
 {
-	public PlayerScore()
-	{
-	}
+	
+	public PlayerScore(): base() {}
 
 	public PlayerScore(IDictionary data)
 	{
@@ -113,25 +112,4 @@ public class PlayerScore : Dictionary<string,object>
 		set { SetProperty ("perpage", value); }
 	}
 
-	private long GetLong(string s) 
-	{
-		return ContainsKey (s) ? long.Parse(this[s].ToString ()) : 0L;
-	}
-	
-	private string GetString(string s) 
-	{	
-		return ContainsKey (s) ? this[s].ToString () : null;
-	}
-	
-	private void SetProperty(string key, object value) 
-	{
-		if(ContainsKey(key))
-		{
-			this[key] = value;
-		} 
-		else 
-		{
-			Add(key, value);
-		}
-	}
 }

@@ -1,11 +1,10 @@
 using System;
 using System.Collections.Generic;
 
-public class PlayerAward : Dictionary<string,object>
+public class PlayerAward : PDictionary
 {
-	public PlayerAward ()
-	{
-	}
+	
+	public PlayerAward(): base() {}
 
 	public PlayerAward(Dictionary<string,object> data)
 	{
@@ -74,25 +73,4 @@ public class PlayerAward : Dictionary<string,object>
 		set { SetProperty ("fields", value); }
 	}
 
-	private long GetLong(string s) 
-	{
-		return ContainsKey (s) ? long.Parse(this[s].ToString ()) : 0L;
-	}
-
-	private string GetString(string s) 
-	{	
-		return ContainsKey (s) ? this[s].ToString () : null;
-	}
-
-	private void SetProperty(string key, object value) 
-	{
-		if(ContainsKey(key))
-		{
-			this[key] = value;
-		} 
-		else 
-		{
-			Add(key, value);
-		}
-	}
 }

@@ -3,13 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-public class PlayerAchievement : Dictionary<string,object>
+public class PlayerAchievement : PDictionary
 {
-	public PlayerAchievement ()
-	{
 
-	}
-
+	public PlayerAchievement(): base() {}
+	
 	public PlayerAchievement(Dictionary<string,object> data)
 	{
 		foreach(string x in data.Keys)
@@ -91,25 +89,4 @@ public class PlayerAchievement : Dictionary<string,object>
 		set { SetProperty("overwrite", value); }
 	}
 
-	private long GetLong(string s) 
-	{
-		return ContainsKey (s) ? long.Parse(this[s].ToString ()) : 0L;
-	}
-
-	private string GetString(string s) 
-	{	
-		return ContainsKey (s) ? this[s].ToString () : null;
-	}
-
-	private void SetProperty(string key, object value) 
-	{
-		if(ContainsKey(key))
-		{
-			this[key] = value;
-		} 
-		else 
-		{
-			Add(key, value);
-		}
-	}
 }
