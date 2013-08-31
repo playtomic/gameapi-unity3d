@@ -182,14 +182,14 @@ internal class PTestLeaderboards : PTest
 		const string section = "TestLeaderboards.FriendsScores";
 		Debug.Log (section);
 
-		var playerids = new ArrayList(){ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" };
+		var playerids = new List<object>(){ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" };
 
 		FriendsScoresLoop (playerids, 0, () => {
 
 			var list = new Dictionary<string,object> {
 				{"table", "friends" + rnd},
 				{"perpage", 3},
-				{"friendslist", new ArrayList(new [] {"1", "2", "3" })}
+				{"friendslist", new List<object>(new [] {"1", "2", "3" })}
 			};
 
 			Playtomic.Leaderboards.List(list, (scores, numscores, r2) => {
@@ -207,7 +207,7 @@ internal class PTestLeaderboards : PTest
 		});
 	}
 
-	private static void FriendsScoresLoop(ArrayList playerids, int points, Action finished)
+	private static void FriendsScoresLoop(List<object> playerids, int points, Action finished)
 	{
 		Thread.Sleep (500);
 		points += 1000;

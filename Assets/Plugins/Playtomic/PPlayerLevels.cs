@@ -77,7 +77,7 @@ public class PPlayerLevels
 			levels = new List<PlayerLevel>();
 			numlevels = (int)(double)data["numlevels"];
 			
-			var levelarr = (ArrayList)data["levels"];
+			var levelarr = (List<object>)data["levels"];
 			
 			for(var i=0; i<levelarr.Count; i++)
 			{

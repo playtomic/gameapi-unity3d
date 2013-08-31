@@ -64,7 +64,7 @@ public class PAchievements
 
 		if (response.success) 
 		{
-			var acharray = (ArrayList) data["achievements"];
+			var acharray = (List<object>) data["achievements"];
 			achievements.AddRange(from object t in acharray select new PlayerAward((Dictionary<string,object>) t));
 		}
 

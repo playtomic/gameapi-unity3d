@@ -19,7 +19,7 @@ public class PTests : MonoBehaviour
 		_tests = new List<Action<Action>>
 			    {
 			        PTestGameVars.All,
-			        PTestGameVars.Single,
+			        //PTestGameVars.Single,
 			        PTestGeoIP.Lookup,
 					PTestNewsletter.Subscribe,
 			        PTestLeaderboards.FirstScore,

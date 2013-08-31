@@ -5,39 +5,81 @@ using System.Collections.Generic;
 
 public class PGameVars
 {
+	
 	private const string SECTION = "gamevars";
 	private const string LOAD = "load";
 	private const string LOADSINGLE = "single";
 		
-	/**
-	 * Loads all GameVars
-	 */
-	public void Load(Action<Dictionary<string,object>, PResponse> callback)
+	public void Load(Action<Dictionary<string,GameVar>, PResponse> callback)
 	{
-		Playtomic.API.StartCoroutine(SendRequest(SECTION, LOAD, callback));
+	
+		Load<GameVar>(callback);
+		
 	}
 	
-	/**
-	 * Loads a single GameVar
-	 * @param	name	string	The variable name to load
-	 */
-	public void LoadSingle(string name, Action<Dictionary<string,object>, PResponse> callback)
+	public void Load(string name, Action<GameVar,PResponse> callback)
 	{
+		Load<GameVar>(name, callback);
+	}
+	
+	public void Load<T>(Action<Dictionary<string,T>, PResponse> callback) where T : GameVar, new()
+	{
+		
+		Playtomic.API.StartCoroutine(SendRequest(SECTION, LOAD,
+			
+			delegate(Dictionary<string,object> results, PResponse response)
+			{
+				
+				Dictionary<string,T> gameVars = new Dictionary<string,T>();
+				
+				if (response.success)
+				{
+					foreach(string key in results.Keys)
+					{
+					
+						if (results[key] is Dictionary<string,object>)
+						{
+						
+							gameVars.Add( key , (T) Activator.CreateInstance(typeof(T), new object[] { results[key] }) );
+						
+						}
+				
+					}
+				
+				}
+			
+				callback(gameVars, response);
+				
+			}));
+		
+	}
+	
+	public void Load<T>(string name, Action<T,PResponse> callback)  where T : GameVar, new()
+	{
+		
 		var postdata = new Dictionary<string,object>
 		{
 			{"name", name}
 		};
 		
-		Playtomic.API.StartCoroutine(SendRequest(SECTION, LOADSINGLE, callback, postdata));
+		Playtomic.API.StartCoroutine(SendRequest(SECTION, LOADSINGLE,
+			
+			delegate(Dictionary<string,object> result, PResponse response)
+			{
+				callback((T) Activator.CreateInstance(typeof(T), new object[] { result[name] }), response);
+			
+			}, postdata));
+		
 	}
 	
 	internal IEnumerator SendRequest(string section, string action, Action<Dictionary<string,object>, PResponse> callback, Dictionary<string,object> postdata = null)
 	{ 
 		var www = PRequest.Prepare (section, action, postdata);
 		yield return www;
-		
 		var response = PRequest.Process(www);
+
 		var data = response.success ? response.json : null;
+	
 		callback(data, response);
 	}
 }

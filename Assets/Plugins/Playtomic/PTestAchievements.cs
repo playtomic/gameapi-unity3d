@@ -110,7 +110,7 @@ internal class PTestAchievements : PTest
 		Debug.Log (section);
 
 		var options = new Dictionary<string,object> {
-			{"friendslist", new ArrayList(new []{"1", "2", "3"})},
+			{"friendslist", new List<object>(new []{"1", "2", "3"})},
 			{"filters", new Dictionary<string,object> { 
 				{"rnd", rnd }
 				}}
@@ -172,7 +172,7 @@ internal class PTestAchievements : PTest
 
 		var options = new Dictionary<string,object> {
 			{"playerid", "1"}, 
-			{"friendslist", new ArrayList(new [] { "2", "3"})},
+			{"friendslist", new List<object>(new [] { "2", "3"})},
 			{"filters", new Dictionary<string,object> { 
 				{"rnd", rnd }
 				}}
@@ -239,7 +239,7 @@ internal class PTestAchievements : PTest
 
 		var options = new Dictionary<string,object> {
 			{"group", true},
-			{"friendslist", new ArrayList(new [] {"2", "3"})},
+			{"friendslist", new List<object>(new [] {"2", "3"})},
 			{"filters", new Dictionary<string,object> { 
 				{"rnd", rnd }
 				}}
@@ -268,7 +268,7 @@ internal class PTestAchievements : PTest
 		var options = new Dictionary<string,object> {
 			{"group", true},
 			{"playerid", "1"},
-			{"friendslist", new ArrayList(new [] { "2", "3" })},
+			{"friendslist", new List<object>(new [] { "2", "3" })},
 			{"filters", new Dictionary<string,object> { 
 				{"rnd", rnd }
 				}}

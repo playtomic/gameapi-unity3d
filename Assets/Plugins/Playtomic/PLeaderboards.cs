@@ -73,7 +73,7 @@ public class PLeaderboards
 		if (response.success)
 		{
 			numitems = (int)(double)data["numscores"];
-			var scorearr = (ArrayList) data["scores"];
+			var scorearr = (List<object>) data["scores"];
 			
 			for(var i=0; i<scorearr.Count; i++)
 			{

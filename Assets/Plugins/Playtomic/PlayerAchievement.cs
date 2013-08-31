@@ -20,7 +20,7 @@ public class PlayerAchievement : Dictionary<string,object>
 			}
 
 			if( x == "friends") {
-				var frarr = (ArrayList)data [x];
+				var frarr = (List<object>)data [x];
 				var fawards = new List<PlayerAward> ();
 				fawards.AddRange(from object t in frarr select new PlayerAward((Dictionary<string,object>) t));
 				friends = fawards;

@@ -13,15 +13,15 @@ internal class PTestGameVars : PTest
 		Debug.Log (section);
 		
 		Playtomic.GameVars.Load ((gv, r) => {
-			gv = gv ?? new Dictionary<string,object> ();
+			gv = gv ?? new Dictionary<string,GameVar> ();
 			AssertTrue (section, "Request succeeded", r.success);
 			AssertEquals (section, "No errorcode", r.errorcode, 0);
 			AssertTrue (section, "Has known testvar1", gv.ContainsKey ("testvar1"));
 			AssertTrue (section, "Has known testvar2", gv.ContainsKey ("testvar2"));
 			AssertTrue (section, "Has known testvar3", gv.ContainsKey ("testvar3"));
-			AssertEquals (section, "Has known testvar1 value", (string)gv ["testvar1"], "testvalue1");
-			AssertEquals (section, "Has known testvar2 value", (string)gv ["testvar2"], "testvalue2");
-			AssertEquals (section, "Has known testvar3 value", (string)gv ["testvar3"], "testvalue3 and the final gamevar");
+			AssertEquals (section, "Has known testvar1 value", gv["testvar1"].value, "testvalue1");
+			AssertEquals (section, "Has known testvar2 value", gv["testvar2"].value, "testvalue2");
+			AssertEquals (section, "Has known testvar3 value", gv["testvar3"].value, "testvalue3 and the final gamevar");
 			done ();
 		});
 	}
@@ -31,8 +31,8 @@ internal class PTestGameVars : PTest
 		const string section = "PTestGameVars.LoadSingle";
 		Debug.Log (section);
 		
-		Playtomic.GameVars.LoadSingle ("testvar1", (gv, r) => {
-			gv = gv ?? new Dictionary<string,object> ();
+		Playtomic.GameVars.Load ("testvar1", (GameVar gv, PResponse r) => {
+			gv = gv ?? new GameVar();
 			AssertTrue (section, "Request succeeded", r.success);
 			AssertEquals (section, "No errorcode", r.errorcode, 0);
 			AssertTrue (section, "Has testvar1", gv.ContainsKey ("testvar1"));

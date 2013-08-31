@@ -11,7 +11,7 @@ using System.Text;
 	/// This class encodes and decodes PJSON strings.
 	/// Spec. details, see http://www.json.org/
 	/// 
-	/// PJSON uses Arrays and Objects. These correspond here to the datatypes ArrayList and Dictionary<string,object>.
+	/// PJSON uses Arrays and Objects. These correspond here to the datatypes List<object> and Dictionary<string,object>.
 	/// All numbers are parsed to doubles.
 	/// </summary>
 	internal class PJSON
@@ -43,7 +43,7 @@ using System.Text;
 		/// Parses the string json into a value
 		/// </summary>
 		/// <param name="json">A PJSON string.</param>
-		/// <returns>An ArrayList, a Dictionary<string,object>, a double, a string, null, true, or false</returns>
+		/// <returns>An List<object>, a Dictionary<string,object>, a double, a string, null, true, or false</returns>
 		public static object JsonDecode(string json)
 		{
 			// save the string for debug information
@@ -66,9 +66,9 @@ using System.Text;
 		}
 
 		/// <summary>
-		/// Converts a Dictionary<string,object> / ArrayList object into a PJSON string
+		/// Converts a Dictionary<string,object> / List<object> object into a PJSON string
 		/// </summary>
-		/// <param name="json">A Dictionary<string,object> / ArrayList</param>
+		/// <param name="json">A Dictionary<string,object> / List<object></param>
 		/// <returns>A PJSON encoded string, or null if object 'json' is not serializable</returns>
 		public static string JsonEncode(object json)
 		{
@@ -164,9 +164,9 @@ using System.Text;
 			return table;
 		}
 
-		protected ArrayList ParseArray(char[] json, ref int index)
+		protected List<object> ParseArray(char[] json, ref int index)
 		{
-			ArrayList array = new ArrayList();
+			List<object> array = new List<object>();
 
 			// [
 			NextToken(json, ref index);
@@ -410,8 +410,8 @@ using System.Text;
 		{
 			if (objectOrArray is Dictionary<string,object>) {
 				return SerializeObject((Dictionary<string,object>)objectOrArray, builder);
-			} else if (objectOrArray is ArrayList) {
-				return SerializeArray((ArrayList)objectOrArray, builder);
+			} else if (objectOrArray is List<object>) {
+				return SerializeArray((List<object>)objectOrArray, builder);
 			} else {
 				return false;
 			}
@@ -444,7 +444,7 @@ using System.Text;
 			return true;
 		}
 
-		protected bool SerializeArray(ArrayList anArray, StringBuilder builder)
+		protected bool SerializeArray(List<object> anArray, StringBuilder builder)
 		{
 			builder.Append("[");
 
@@ -473,8 +473,8 @@ using System.Text;
 				SerializeString((string)value, builder);
 			} else if (value is Dictionary<string,object>) {
 				SerializeObject((Dictionary<string,object>)value, builder);
-			} else if (value is ArrayList) {
-				SerializeArray((ArrayList)value, builder);
+			} else if (value is List<object>) {
+				SerializeArray((List<object>)value, builder);
 			} else if (IsNumeric(value)) {
 				SerializeNumber(Convert.ToDouble(value), builder);
 			} else if ((value is Boolean) && ((Boolean)value == true)) {
