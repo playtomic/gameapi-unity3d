@@ -8,11 +8,14 @@ public class PDictionary : Dictionary<string,object> {
 	{
 	}
 
-	public PDictionary(Dictionary<string,object> data)
+	public PDictionary(IDictionary data)
 	{
-		foreach(string x in data.Keys)
-		{			
-			this[x] = data[x];
+		if (data != null)
+		{
+			foreach(string x in data.Keys)
+			{			
+				this[x] = data[x];
+			}
 		}
 	}
 	

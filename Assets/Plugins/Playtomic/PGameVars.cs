@@ -12,9 +12,7 @@ public class PGameVars
 		
 	public void Load(Action<Dictionary<string,GameVar>, PResponse> callback)
 	{
-	
 		Load<GameVar>(callback);
-		
 	}
 	
 	public void Load(string name, Action<GameVar,PResponse> callback)
@@ -66,7 +64,28 @@ public class PGameVars
 			
 			delegate(Dictionary<string,object> result, PResponse response)
 			{
-				callback((T) Activator.CreateInstance(typeof(T), new object[] { result[name] }), response);
+			
+				T gameVar = null;
+			
+				if (result != null)
+				{
+			
+					if (result.ContainsKey(name))
+					{
+					
+						gameVar = (T) Activator.CreateInstance(typeof(T), new object[] { result[name] });
+					
+					}
+				
+				}
+			
+				if (gameVar == null)
+				{
+					gameVar = new T();
+					gameVar["name"] = gameVar["value"] = name + " not stored in GameVars";
+				}
+					
+				callback(gameVar, response);
 			
 			}, postdata));
 		
@@ -75,11 +94,15 @@ public class PGameVars
 	internal IEnumerator SendRequest(string section, string action, Action<Dictionary<string,object>, PResponse> callback, Dictionary<string,object> postdata = null)
 	{ 
 		var www = PRequest.Prepare (section, action, postdata);
+		
 		yield return www;
+		
 		var response = PRequest.Process(www);
 
 		var data = response.success ? response.json : null;
 	
 		callback(data, response);
+		
+		
 	}
 }
