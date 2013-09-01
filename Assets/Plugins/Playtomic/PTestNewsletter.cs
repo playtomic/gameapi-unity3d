@@ -1,6 +1,6 @@
 using UnityEngine;
 using System;
-using System.Collections;
+using System.Collections.Generic;
 
 internal class PTestNewsletter : PTest 
 {
@@ -9,9 +9,11 @@ internal class PTestNewsletter : PTest
 		const string section = "PTestNewsletter.Subscribe";
 		Debug.Log (section);
 
-		var options = new Hashtable
+		PNewsletterOptions options = new PNewsletterOptions
 		{
-			{"email", "invalid @email.com"}
+		
+			email = "invalid @email.com"
+			
 		};
 
 		Playtomic.Newsletter.Subscribe (options, r => {
@@ -19,7 +21,7 @@ internal class PTestNewsletter : PTest
 			AssertEquals(section + "#1", "Mailchimp API error", r.errorcode, 602);
 
 			options["email"] = "valid@testuri.com";
-			options["fields"] = new Hashtable { 
+			options["fields"] = new Dictionary<string,object> { 
 				{"STRINGVALUE", "this is a string"}
 			};
 

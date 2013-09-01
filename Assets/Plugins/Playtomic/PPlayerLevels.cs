@@ -18,7 +18,7 @@ public class PPlayerLevels
 	 */
 	public void Save(PlayerLevel level, Action<PlayerLevel, PResponse> callback)
 	{
-		Playtomic.API.StartCoroutine(SendSaveLoadRequest(SECTION, SAVE, (Hashtable) level, callback));
+		Playtomic.API.StartCoroutine(SendSaveLoadRequest(SECTION, SAVE, (Dictionary<string,object>) level, callback));
 	}
 	
 	/**
@@ -28,7 +28,7 @@ public class PPlayerLevels
 	 */
 	public void Load(string levelid, Action<PlayerLevel, PResponse> callback)
 	{
-		var postdata = new Hashtable
+		var postdata = new Dictionary<string,object>
 		{
 			{"levelid", levelid }
 		};
@@ -36,7 +36,7 @@ public class PPlayerLevels
 		Playtomic.API.StartCoroutine(SendSaveLoadRequest(SECTION, LOAD, postdata, callback));
 	}
 
-	private IEnumerator SendSaveLoadRequest(string section, string action, Hashtable postdata, Action<PlayerLevel, PResponse> callback)
+	private IEnumerator SendSaveLoadRequest(string section, string action, Dictionary<string,object> postdata, Action<PlayerLevel, PResponse> callback)
 	{ 
 		var www = PRequest.Prepare (section, action, postdata);
 		yield return www;
@@ -46,7 +46,7 @@ public class PPlayerLevels
 		
 		if (response.success)
 		{
-			level = new PlayerLevel((Hashtable) response.json["level"]);
+			level = new PlayerLevel((Dictionary<string,object>) response.json["level"]);
 		}
 		
 		callback(level, response);
@@ -54,15 +54,15 @@ public class PPlayerLevels
 	
 	/**
 	 * Lists levels
-	 * @param	options	Hashtable	The listing options
+	 * @param	options	Dictionary<string,object>	The listing options
 	 * @param 	callback	Action<List<PlayerLevel>, int, PResponse>	Callback function
 	 */
-	public void List(Hashtable options, Action<List<PlayerLevel>, int, PResponse> callback)
+	public void List(PPlayerLevelOptions options, Action<List<PlayerLevel>, int, PResponse> callback)
 	{
 		Playtomic.API.StartCoroutine(SendListRequest(SECTION, LIST, options, callback));
 	}
 	
-	private IEnumerator SendListRequest(string section, string action, Hashtable postdata, Action<List<PlayerLevel>, int, PResponse> callback) 
+	private IEnumerator SendListRequest(string section, string action, Dictionary<string,object> postdata, Action<List<PlayerLevel>, int, PResponse> callback) 
 	{
 		var www = PRequest.Prepare(SECTION, LIST, postdata);
 		yield return www;
@@ -73,15 +73,15 @@ public class PPlayerLevels
 	
 		if (response.success)
 		{
-			var data = (Hashtable)response.json;
+			var data = (Dictionary<string,object>)response.json;
 			levels = new List<PlayerLevel>();
 			numlevels = (int)(double)data["numlevels"];
 			
-			var levelarr = (ArrayList)data["levels"];
+			var levelarr = (List<object>)data["levels"];
 			
 			for(var i=0; i<levelarr.Count; i++)
 			{
-				levels.Add(new PlayerLevel((Hashtable) levelarr[i]));
+				levels.Add(new PlayerLevel((Dictionary<string,object>) levelarr[i]));
 			}
 		}
 		
@@ -102,7 +102,7 @@ public class PPlayerLevels
 			return;
 		}
 
-		var postdata = new Hashtable
+		var postdata = new Dictionary<string,object>
 		{
 			{"levelid", levelid},
 			{"rating", rating}
@@ -111,7 +111,7 @@ public class PPlayerLevels
 		Playtomic.API.StartCoroutine(SendRateRequest(SECTION, RATE, postdata, callback));
 	}
 
-	private IEnumerator SendRateRequest(string section, string action, Hashtable postdata, Action<PResponse> callback)
+	private IEnumerator SendRateRequest(string section, string action, Dictionary<string,object> postdata, Action<PResponse> callback)
 	{		
 		var www = PRequest.Prepare(SECTION, RATE, postdata);
 		yield return www;

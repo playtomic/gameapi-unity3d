@@ -3,26 +3,24 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-public class PlayerAchievement : Hashtable
+public class PlayerAchievement : PDictionary
 {
-	public PlayerAchievement ()
-	{
 
-	}
-
-	public PlayerAchievement(Hashtable data)
+	public PlayerAchievement(): base() {}
+	
+	public PlayerAchievement(Dictionary<string,object> data)
 	{
 		foreach(string x in data.Keys)
 		{
 			if (x == "player") {
-				player = new PlayerAward ((Hashtable)data["player"]);
+				player = new PlayerAward ((Dictionary<string,object>)data["player"]);
 				continue;
 			}
 
 			if( x == "friends") {
-				var frarr = (ArrayList)data [x];
+				var frarr = (List<object>)data [x];
 				var fawards = new List<PlayerAward> ();
-				fawards.AddRange(from object t in frarr select new PlayerAward((Hashtable) t));
+				fawards.AddRange(from object t in frarr select new PlayerAward((Dictionary<string,object>) t));
 				friends = fawards;
 				continue;
 			}
@@ -61,9 +59,9 @@ public class PlayerAchievement : Hashtable
 		set { SetProperty ("playername", value); }
 	}
 
-	public Hashtable fields
+	public Dictionary<string,object> fields
 	{
-		get { return ContainsKey ("fields") ? (Hashtable)this["fields"] : new Hashtable();	}
+		get { return ContainsKey ("fields") ? (Dictionary<string,object>)this["fields"] : new Dictionary<string,object>();	}
 		set { SetProperty ("fields", value); }
 	}
 
@@ -91,25 +89,4 @@ public class PlayerAchievement : Hashtable
 		set { SetProperty("overwrite", value); }
 	}
 
-	private long GetLong(string s) 
-	{
-		return ContainsKey (s) ? long.Parse(this[s].ToString ()) : 0L;
-	}
-
-	private string GetString(string s) 
-	{	
-		return ContainsKey (s) ? this[s].ToString () : null;
-	}
-
-	private void SetProperty(string key, object value) 
-	{
-		if(ContainsKey(key))
-		{
-			this[key] = value;
-		} 
-		else 
-		{
-			Add(key, value);
-		}
-	}
 }

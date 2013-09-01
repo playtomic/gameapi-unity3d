@@ -7,7 +7,7 @@ public class PResponse
 	public bool success;
 	public int errorcode;
 	public string overridemessage;
-	internal Hashtable json;
+	internal Dictionary<string,object> json;
 	
 	public static PResponse GeneralError(string message)
 	{
@@ -67,7 +67,9 @@ public class PResponse
 				case 204:
 					return "Score was not saved because it was not the player's best, you can allow players to have " +
 						"more than one score by specifying allowduplicates=true in your save options";
-
+				case 207:
+					return "The leaderboard table wasn't provided";
+				
 				case 300:
 					return "GameVars API has been disabled for this game";
 						

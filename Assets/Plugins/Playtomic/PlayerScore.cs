@@ -1,11 +1,11 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 
-public class PlayerScore : Hashtable
+public class PlayerScore : PDictionary
 {
-	public PlayerScore()
-	{
-	}
+	
+	public PlayerScore(): base() {}
 
 	public PlayerScore(IDictionary data)
 	{
@@ -70,18 +70,18 @@ public class PlayerScore : Hashtable
 		get { return GetString ("rdate"); }
 	}
 
-	public Hashtable fields
+	public PDictionary fields
 	{
-		get { return ContainsKey ("fields") ? (Hashtable)this["fields"] : new Hashtable();	}
+		get { return GetDictionary("fields"); }
 		set { SetProperty ("fields", value); }
 	}
 
-	public Hashtable filters
+	public PDictionary filters
 	{
-		get { return ContainsKey ("filters") ? (Hashtable)this["filters"] : new Hashtable();	}
+		get { return GetDictionary("filters"); }
 		set { SetProperty ("filters", value); }
 	}
-	
+
 	public bool highest
 	{
 		get { return ContainsKey ("highest") && (bool) this["highest"]; }
@@ -112,25 +112,4 @@ public class PlayerScore : Hashtable
 		set { SetProperty ("perpage", value); }
 	}
 
-	private long GetLong(string s) 
-	{
-		return ContainsKey (s) ? long.Parse(this[s].ToString ()) : 0L;
-	}
-	
-	private string GetString(string s) 
-	{	
-		return ContainsKey (s) ? this[s].ToString () : null;
-	}
-	
-	private void SetProperty(string key, object value) 
-	{
-		if(ContainsKey(key))
-		{
-			this[key] = value;
-		} 
-		else 
-		{
-			Add(key, value);
-		}
-	}
 }
