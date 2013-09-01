@@ -18,67 +18,93 @@ public class PLeaderboards
 	 */
 	public void Save(PlayerScore score, Action<PResponse> callback)
 	{
+		Save<PlayerScore>(score,callback);
+	}
+	
+	public void Save<T>(T score, Action<PResponse> callback) where T : PlayerScore
+	{
 		Playtomic.API.StartCoroutine(SendSaveRequest(SECTION, SAVE, score, callback));
 	}
-	
-	private IEnumerator SendSaveRequest(string section, string action, Hashtable postdata, Action<PResponse> callback)
-	{ 
-		var www = PRequest.Prepare (section, action, postdata);
-		yield return www;
-		
-		var response = PRequest.Process(www);
-		callback(response);
+
+	public void SaveAndList(PlayerScore score, Action<List<PlayerScore>, int, PResponse> callback)
+	{
+		SaveAndList<PlayerScore>(score,callback);
 	}
 	
-	/**
-	 * Saves a player's score and then returns the page of scores
-	 * it is on
-	 * @param	score	PlayerScore	The PlayerScore object 
-	 * @param	callback	Action<List<PlayerScore>, int, PResponse> Your callback method
-	 */
-	public void SaveAndList(PlayerScore score, Action<List<PlayerScore>, int, PResponse> callback)
+	public void SaveAndList<T>(T score, Action<List<T>, int, PResponse> callback) where T : PlayerScore
 	{
 		Playtomic.API.StartCoroutine(SendListRequest(SECTION, SAVEANDLIST, score, callback));
 	}
 	
 	/**
 	 * Lists scores
-	 * @param	options	Hashtable	The listing options
+	 * @param	options	Dictionary<string,object>	The listing options
 	 * @param	callback	Action<List<PlayerScore>, int, PResponse>	Your callback function
 	 */
-	public void List(Hashtable options, Action<List<PlayerScore>, int, PResponse> callback)
-	{	
-		Playtomic.API.StartCoroutine(SendListRequest(SECTION, LIST, options, callback));
+	
+	public void List(PLeaderboardOptions options, Action<List<PlayerScore>, int, PResponse> callback)
+	{
+		List<PlayerScore>(options,callback);		
 	}
 	
-	private IEnumerator SendListRequest(string section, string action, Hashtable postdata, Action<List<PlayerScore>, int, PResponse> callback)
+	public void List<T>(PLeaderboardOptions options, Action<List<T>, int, PResponse> callback)  where T : PlayerScore
+	{	
+		Playtomic.API.StartCoroutine(SendListRequest<T>(SECTION, LIST, options, callback));
+	}
+	
+	private IEnumerator SendSaveRequest(string section, string action, Dictionary<string,object> postdata, Action<PResponse> callback)
 	{ 
-		var www = PRequest.Prepare (section, action, postdata);
+		WWW www = PRequest.Prepare (section, action, postdata);
 		yield return www;
 		
+		PResponse response = PRequest.Process(www);
+		callback(response);
+	}
+	
+	
+	private IEnumerator SendListRequest<T>(string section, string action, Dictionary<string,object> postdata, Action<List<T>, int, PResponse> callback) where T : PlayerScore
+	{ 
+		WWW www = PRequest.Prepare (section, action, postdata);
+	
+		yield return www;
+	
 		var response = PRequest.Process(www);
 		var data = response.json;
-		List<PlayerScore> scores;
-		int numscores;
-		ProcessScores (response, data, out scores, out numscores);
+		
+		List<T> scores = new List<T>();
+		
+		int numscores = 0;
+
+		if (response.success)
+		{
+	
+			if (data.ContainsKey("numscores"))
+			{
+			
+				int.TryParse(data["numscores"].ToString(), out numscores);
+				
+			}
+			
+			if (data.ContainsKey("scores"))
+			{
+	
+				if (data["scores"] is IList)
+				{
+
+					foreach(IDictionary score in (IList) data["scores"])
+					{
+						
+						scores.Add((T) Activator.CreateInstance(typeof(T), new object[] { score }));
+						
+					}
+					
+				}
+				
+			}
+			
+		}
 		
 		callback(scores, numscores, response);
 	}
-	
-	private void ProcessScores(PResponse response, Hashtable data, out List<PlayerScore> scores, out int numitems)
-	{
-		scores = new List<PlayerScore>();
-		numitems = 0;
-		
-		if (response.success)
-		{
-			numitems = (int)(double)data["numscores"];
-			var scorearr = (ArrayList) data["scores"];
-			
-			for(var i=0; i<scorearr.Count; i++)
-			{
-				scores.Add(new PlayerScore((Hashtable) scorearr[i]));
-			}
-		}
-	}
+
 }
