@@ -1,22 +1,29 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 
-public class PlayerCountry
+public class PlayerCountry : PDictionary
 {
-	public PlayerCountry() 
+	public PlayerCountry(): base() {}
+
+	public PlayerCountry(IDictionary data)
 	{
-	}
-	
-	public PlayerCountry(Dictionary<string,object> data)
-	{
-		if(data == null) {
-			return;
+		foreach(string x in data.Keys)
+		{			
+			this[x] = data[x];
 		}
-		
-		name = data.ContainsKey ("name") ? (string)data["name"] : null;
-		code = data.ContainsKey ("code") ? (string)data["code"] : null;
 	}
 	
-	public string name { get; set; }
-	public string code { get; set; }
+	public string name 
+	{
+		get { return GetString ("name"); }
+		set { SetProperty("name", value); }
+	}
+	
+	public string code
+	{
+		get { return GetString ("code"); }
+		set { SetProperty ("code", value); }
+	}	
+	
 }
