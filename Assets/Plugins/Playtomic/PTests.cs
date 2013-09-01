@@ -8,11 +8,14 @@ using System.Collections.Generic;
 //{
 public class PTests : MonoBehaviour
 {
+	
+	public string testURL = "http://127.0.0.1:3000";
+	
 	private List<Action<Action>> _tests;
 		
 	public void Start ()
 	{
-		Playtomic.Initialize ("testpublickey", "testprivatekey", "http://127.0.0.1:3000");
+		Playtomic.Initialize ("testpublickey", "testprivatekey", testURL);
 		PTest.Setup ();	
 		PTestLeaderboards.rnd = PTestPlayerLevels.rnd = PTestAchievements.rnd = RND ();
 			
