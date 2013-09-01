@@ -221,10 +221,11 @@ internal class PTestAchievements : PTest
 		const string section = "PTestAchievements.Stream";
 		Debug.Log (section);
 
-		var options = new Dictionary<string,object> {
-			{"filters", new Dictionary<string,object> { 
-				{"rnd", rnd }
-				}}
+		PAchievementStreamOptions options = new PAchievementStreamOptions {
+		
+			filters = new PDictionary{
+				{"rnd",rnd}
+			}
 		};
 
 		Playtomic.Achievements.Stream(options, (achievements, numachievements, r) => {
@@ -252,13 +253,14 @@ internal class PTestAchievements : PTest
 		const string section = "PTestAchievements.StreamWithFriends";
 		Debug.Log (section);
 
-		var options = new Dictionary<string,object> {
-			{"group", true},
-			{"friendslist", new List<object>(new [] {"2", "3"})},
-			{"filters", new Dictionary<string,object> { 
-				{"rnd", rnd }
-				}}
+		PAchievementStreamOptions options = new PAchievementStreamOptions {
+			group = true,
+			friendslist = new List<string>(new [] {"2", "3"}),
+			filters = new PDictionary{
+				{"rnd",rnd}
+			}
 		};
+
 
 		Playtomic.Achievements.Stream(options, (achievements, numachievements, r) => {
 			AssertTrue(section, "Request succeeded", r.success);
@@ -280,13 +282,13 @@ internal class PTestAchievements : PTest
 		const string section = "PTestAchievements.StreamWithPlayerAndFriends";
 		Debug.Log (section);
 
-		var options = new Dictionary<string,object> {
-			{"group", true},
-			{"playerid", "1"},
-			{"friendslist", new List<object>(new [] { "2", "3" })},
-			{"filters", new Dictionary<string,object> { 
-				{"rnd", rnd }
-				}}
+		PAchievementStreamOptions options = new PAchievementStreamOptions {
+			group = true,
+			friendslist = new List<string>(new [] {"2", "3"}),
+			playerid = "1",
+			filters = new PDictionary{
+				{"rnd",rnd}
+			}
 		};
 
 		Playtomic.Achievements.Stream(options, (achievements, numachievements, r) => {

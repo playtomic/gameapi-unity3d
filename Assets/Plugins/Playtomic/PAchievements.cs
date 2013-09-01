@@ -55,7 +55,7 @@ public class PAchievements
 	 * @param	options		The stream options
 	 * @param	callback	Your callback Action<List<Achievement>, int, PResponse>
 	 */ 
-	public void Stream(Dictionary<string,object> options, Action<List<PlayerAward>, int, PResponse> callback) {
+	public void Stream(PAchievementStreamOptions options, Action<List<PlayerAward>, int, PResponse> callback) {
 		Playtomic.API.StartCoroutine(SendStreamRequest(SECTION, STREAM, callback, options));
 	}
 	

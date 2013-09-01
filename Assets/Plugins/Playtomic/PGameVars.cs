@@ -9,7 +9,7 @@ public class PGameVars
 	private const string SECTION = "gamevars";
 	private const string LOAD = "load";
 	private const string LOADSINGLE = "single";
-		
+
 	public void Load(Action<Dictionary<string,GameVar>, PResponse> callback)
 	{
 		Load<GameVar>(callback);
