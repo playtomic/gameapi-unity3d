@@ -12,12 +12,12 @@ public class PNewsletter
 	 * @param	options	Dictionary<string,object>	The email and other information
 	 * @param	callback	Action<PResponse>	Your callback function
 	 */
-	public void Subscribe(Dictionary<string,object> options, Action<PResponse> callback)
+	public void Subscribe(PNewsletterOptions options, Action<PResponse> callback)
 	{
 		Playtomic.API.StartCoroutine(SendRequest(SECTION, SUBSCRIBE, callback, options));
 	}
 			
-	private IEnumerator SendRequest(string section, string action, Action<PResponse> callback, Dictionary<string,object> options)
+	private IEnumerator SendRequest(string section, string action, Action<PResponse> callback, PNewsletterOptions options)
 	{ 
 		var www = PRequest.Prepare (section, action, options);
 		yield return www;

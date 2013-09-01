@@ -41,11 +41,13 @@ internal class PRequest
 		postdata.Add ("action", action);
 	
 		var json = PJSON.JsonEncode(postdata);
-		
+
 		var post = new WWWForm();
 		post.AddField("data", PEncode.Base64(json));
 		post.AddField("hash", PEncode.MD5 (json + PRIVATEKEY));
-
+		
+		
+		
 		return new WWW(APIURL, post);
 	}
 	

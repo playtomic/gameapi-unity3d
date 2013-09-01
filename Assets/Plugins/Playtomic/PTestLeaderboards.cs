@@ -191,7 +191,7 @@ internal class PTestLeaderboards : PTest
 			PLeaderboardOptions list = new PLeaderboardOptions
 			{
 				
-				table = "scores" + rnd,
+				table = "friends" + rnd,
 				perpage = 3,
 				friendslist = new List<string> { "1", "2", "3" }
 			};

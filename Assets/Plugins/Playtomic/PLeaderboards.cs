@@ -54,42 +54,57 @@ public class PLeaderboards
 	
 	private IEnumerator SendSaveRequest(string section, string action, Dictionary<string,object> postdata, Action<PResponse> callback)
 	{ 
-		var www = PRequest.Prepare (section, action, postdata);
+		WWW www = PRequest.Prepare (section, action, postdata);
 		yield return www;
 		
-		var response = PRequest.Process(www);
+		PResponse response = PRequest.Process(www);
 		callback(response);
 	}
 	
 	
 	private IEnumerator SendListRequest<T>(string section, string action, Dictionary<string,object> postdata, Action<List<T>, int, PResponse> callback) where T : PlayerScore
 	{ 
-		var www = PRequest.Prepare (section, action, postdata);
+		WWW www = PRequest.Prepare (section, action, postdata);
+	
 		yield return www;
-		
+	
 		var response = PRequest.Process(www);
 		var data = response.json;
-		List<T> scores;
-		int numscores;
-		ProcessScores<T>(response, data, out scores, out numscores);
+		
+		List<T> scores = new List<T>();
+		
+		int numscores = 0;
+
+		if (response.success)
+		{
+	
+			if (data.ContainsKey("numscores"))
+			{
+			
+				int.TryParse(data["numscores"].ToString(), out numscores);
+				
+			}
+			
+			if (data.ContainsKey("scores"))
+			{
+	
+				if (data["scores"] is IList)
+				{
+
+					foreach(IDictionary score in (IList) data["scores"])
+					{
+						
+						scores.Add((T) Activator.CreateInstance(typeof(T), new object[] { score }));
+						
+					}
+					
+				}
+				
+			}
+			
+		}
 		
 		callback(scores, numscores, response);
 	}
-	
-	private void ProcessScores<T>(PResponse response, Dictionary<string,object> data, out List<T> scores, out int numitems) where T : PlayerScore
-	{
-		scores = new List<T>();
-		numitems = 0;
-		
-		if (response.success)
-		{
-			numitems = (int)(double)data["numscores"];
-			var scorearr = (List<object>) data["scores"];
-			
-			for(var i=0; i<scorearr.Count; i++)
-			{
-				scores.Add((T) Activator.CreateInstance(typeof(T), new object[] { scorearr[i] }));
-			}
-		}
-	}
+
 }

@@ -48,15 +48,21 @@ internal class PTestPlayerLevels : PTest
 		const string section = "PTestPlaytomic.PlayerLevels.List";
 		Debug.Log(section);
 
-		var listoptions = new Dictionary<string,object> { 
-				{"page", 1},
-				{"perpage", 10},
-				{"data", false},
-				{"filters", new Dictionary<string,object> {
-						{"rnd", rnd}
-					}
-				}
-			};
+		PPlayerLevelOptions listoptions = new PPlayerLevelOptions
+		{
+			
+			page = 1,
+			perpage = 10,
+			data = false,
+			filters = new PDictionary {
+			
+				{"rnd",rnd}
+				
+				
+			}
+			
+			
+		};
 			
 		Playtomic.PlayerLevels.List (listoptions, (levels, numlevels, r) => {			
 			levels = levels ?? new List<PlayerLevel> ();

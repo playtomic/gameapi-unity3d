@@ -90,12 +90,14 @@ public class PDictionary : Dictionary<string,object> {
 	
 	protected List<T> GetList<T>(string s) 
 	{	
-		List<T> r = new List<T>();
-		
+		List<T> r = null;
+
 		if (ContainsKey(s))
 		{
 			if (this[s] is IList)
 			{
+				
+				r = new List<T>();
 									
 				foreach(var v in (IList) this[s])
 				{

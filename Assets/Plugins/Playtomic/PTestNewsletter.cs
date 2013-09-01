@@ -9,9 +9,11 @@ internal class PTestNewsletter : PTest
 		const string section = "PTestNewsletter.Subscribe";
 		Debug.Log (section);
 
-		var options = new Dictionary<string,object>
+		PNewsletterOptions options = new PNewsletterOptions
 		{
-			{"email", "invalid @email.com"}
+		
+			email = "invalid @email.com"
+			
 		};
 
 		Playtomic.Newsletter.Subscribe (options, r => {

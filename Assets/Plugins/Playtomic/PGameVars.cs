@@ -35,7 +35,7 @@ public class PGameVars
 			{"name", name}
 		};
 		
-		Playtomic.API.StartCoroutine(SendRequest<T>(SECTION, LOADSINGLE, callback, postdata));
+		Playtomic.API.StartCoroutine(SendRequest<T>(name, SECTION, LOADSINGLE, callback, postdata));
 		
 	}
 	
@@ -74,7 +74,7 @@ public class PGameVars
 	
 	}
 	
-	internal IEnumerator SendRequest<T>(string section, string action, Action<T, PResponse> callback, Dictionary<string,object> postdata = null) where T : GameVar, new()
+	internal IEnumerator SendRequest<T>(string name, string section, string action, Action<T, PResponse> callback, Dictionary<string,object> postdata = null) where T : GameVar, new()
 	{ 
 		var www = PRequest.Prepare (section, action, postdata);
 		
@@ -85,11 +85,21 @@ public class PGameVars
 		var data = response.success ? response.json : null;
 	
 		T gameVar = new T();
-		
+
 		if (data != null)
 		{
+		
+			if (data is IDictionary)
+			{
 			
-			gameVar = (T) Activator.CreateInstance(typeof(T), new object[] { data });
+				if (data.ContainsKey(name))
+				{
+					
+					gameVar = (T) Activator.CreateInstance(typeof(T), new object[] { data[name] });
+					
+				}
+			
+			}
 			
 		}
 			

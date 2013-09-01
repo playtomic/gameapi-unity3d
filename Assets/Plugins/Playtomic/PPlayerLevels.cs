@@ -57,7 +57,7 @@ public class PPlayerLevels
 	 * @param	options	Dictionary<string,object>	The listing options
 	 * @param 	callback	Action<List<PlayerLevel>, int, PResponse>	Callback function
 	 */
-	public void List(Dictionary<string,object> options, Action<List<PlayerLevel>, int, PResponse> callback)
+	public void List(PPlayerLevelOptions options, Action<List<PlayerLevel>, int, PResponse> callback)
 	{
 		Playtomic.API.StartCoroutine(SendListRequest(SECTION, LIST, options, callback));
 	}

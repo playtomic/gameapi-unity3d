@@ -67,10 +67,11 @@ internal class PTestAchievements : PTest
 
 		ListLoop (section, achievements, () => {
 
-			var options = new Dictionary<string,object> {
-				{"filters", new Dictionary<string,object> { 
-					{"rnd", rnd }
-					}}
+			PAchievementOptions options = new PAchievementOptions {
+			
+				filters = new PDictionary{
+					{"rnd",rnd}
+				}
 			};
 
 			Playtomic.Achievements.List(options, (ach, r2) => {
@@ -109,11 +110,16 @@ internal class PTestAchievements : PTest
 		const string section = "PTestAchievements.ListWithFriends";
 		Debug.Log (section);
 
-		var options = new Dictionary<string,object> {
-			{"friendslist", new List<object>(new []{"1", "2", "3"})},
-			{"filters", new Dictionary<string,object> { 
-				{"rnd", rnd }
-				}}
+
+		PAchievementOptions options = new PAchievementOptions {
+		
+			friendslist = new List<string>(new [] {"1", "2", "3"}),
+	
+			filters = new PDictionary{
+				{"rnd",rnd}
+			}
+		
+		
 		};
 
 		Playtomic.Achievements.List(options, (achievements, r) => {
@@ -141,11 +147,15 @@ internal class PTestAchievements : PTest
 		const string section = "PTestAchievements.ListWithPlayer";
 		Debug.Log (section);
 
-		var options = new Dictionary<string,object> {
-			{"playerid", "1"},
-			{"filters", new Dictionary<string,object> { 
-				{"rnd", rnd }
-				}}
+
+		PAchievementOptions options = new PAchievementOptions {
+		
+			playerid = "1",
+			filters = new PDictionary{
+				{"rnd",rnd}
+			}
+		
+		
 		};
 
 		Playtomic.Achievements.List(options, (achievements, r) => {
@@ -170,13 +180,18 @@ internal class PTestAchievements : PTest
 		const string section = "PTestAchievements.ListWithPlayerAndFriends";
 		Debug.Log (section);
 
-		var options = new Dictionary<string,object> {
-			{"playerid", "1"}, 
-			{"friendslist", new List<object>(new [] { "2", "3"})},
-			{"filters", new Dictionary<string,object> { 
-				{"rnd", rnd }
-				}}
+		PAchievementOptions options = new PAchievementOptions {
+		
+			playerid = "1",
+						
+			filters = new PDictionary{
+				{"rnd",rnd}
+			},
+			
+			friendslist = new List<string>(new [] {"1", "2", "3"}),
+	
 		};
+		
 
 		Playtomic.Achievements.List(options, (achievements, r) => {
 			AssertTrue(section, "Request succeeded", r.success);

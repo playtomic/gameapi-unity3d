@@ -15,12 +15,19 @@ public class PAchievements
 	 * @param	options		The list options
 	 * @param	callback	Your callback Action<List<Achievement>, PResponse>
 	 */
-	public void List(Dictionary<string,object> options, Action<List<PlayerAchievement>, PResponse> callback) {
+	public void List(PAchievementOptions options, Action<List<PlayerAchievement>, PResponse> callback) 
+	{
+		
+		List<PlayerAchievement>(options,callback);
+	}
+	
+	public void List<T>(PAchievementOptions options, Action<List<T>, PResponse> callback) where T : PlayerAchievement, new()
+	{
 		
 		Playtomic.API.StartCoroutine(SendListRequest(SECTION, LIST, callback, options));
 	}
 	
-	internal IEnumerator SendListRequest(string section, string action, Action<List<PlayerAchievement>, PResponse> callback, Dictionary<string,object> postdata = null)
+	internal IEnumerator SendListRequest<T>(string section, string action, Action<List<T>, PResponse> callback, Dictionary<string,object> postdata = null) where T : PlayerAchievement
 	{ 
 		var www = PRequest.Prepare (section, action, postdata);
 		yield return www;
@@ -28,12 +35,16 @@ public class PAchievements
 		var response = PRequest.Process(www);
 		var data = response.success ? response.json : null;
 		
-		UnityEngine.Debug.Log(data);
-		var achievements = new List<PlayerAchievement>();
+		List<T> achievements = new List<T>();
+		
 		if (response.success) 
 		{
-			var acharray = (List<PlayerAchievement>) data["achievements"];
-			achievements.AddRange(from object t in acharray select new PlayerAchievement((Dictionary<string,object>) t));
+
+			foreach(IDictionary achievment in (IList) data["achievements"])
+			{
+				achievements.Add((T) Activator.CreateInstance(typeof(T), new object[] { achievment }));
+			}
+			
 		}
 		
 		callback(achievements, response);

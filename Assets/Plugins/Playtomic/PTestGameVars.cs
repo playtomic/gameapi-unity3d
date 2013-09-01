@@ -19,9 +19,9 @@ internal class PTestGameVars : PTest
 			AssertTrue (section, "Has known testvar1", gv.ContainsKey ("testvar1"));
 			AssertTrue (section, "Has known testvar2", gv.ContainsKey ("testvar2"));
 			AssertTrue (section, "Has known testvar3", gv.ContainsKey ("testvar3"));
-			AssertEquals (section, "Has known testvar1 value", gv["testvar1"].value, "testvalue1");
-			AssertEquals (section, "Has known testvar2 value", gv["testvar2"].value, "testvalue2");
-			AssertEquals (section, "Has known testvar3 value", gv["testvar3"].value, "testvalue3 and the final gamevar");
+			AssertEquals (section, "Has known testvar1 value", "testvalue1", gv["testvar1"].value);
+			AssertEquals (section, "Has known testvar2 value", "testvalue2", gv["testvar2"].value);
+			AssertEquals (section, "Has known testvar3 value", "testvalue3 and the final gamevar", gv["testvar3"].value);
 			done ();
 		});
 	}
@@ -35,8 +35,8 @@ internal class PTestGameVars : PTest
 			gv = gv ?? new GameVar();
 			AssertTrue (section, "Request succeeded", r.success);
 			AssertEquals (section, "No errorcode", r.errorcode, 0);
-			AssertTrue (section, "Has testvar1", gv.ContainsKey ("testvar1"));
-			AssertEquals (section, "Has known testvar1 value", (string)gv ["testvar1"], "testvalue1");
+			AssertEquals (section, "Has known testvar1 name", "testvar1", gv["name"].ToString() );
+			AssertEquals (section, "Has known testvalue1 value", "testvalue1", gv["value"].ToString() );
 			AssertFalse (section, "Does not have testvar2", gv.ContainsKey ("testvar2"));
 			AssertFalse (section, "Does not have testvar3", gv.ContainsKey ("testvar3"));
 			done ();

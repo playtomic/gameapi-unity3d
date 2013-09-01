@@ -444,7 +444,7 @@ using System.Text;
 			return true;
 		}
 
-		protected bool SerializeArray(List<object> anArray, StringBuilder builder)
+		protected bool SerializeArray(IList anArray, StringBuilder builder)
 		{
 			builder.Append("[");
 
@@ -473,8 +473,8 @@ using System.Text;
 				SerializeString((string)value, builder);
 			} else if (value is Dictionary<string,object>) {
 				SerializeObject((Dictionary<string,object>)value, builder);
-			} else if (value is List<object>) {
-				SerializeArray((List<object>)value, builder);
+			} else if (value is IList) {
+				SerializeArray((IList)value, builder);
 			} else if (IsNumeric(value)) {
 				SerializeNumber(Convert.ToDouble(value), builder);
 			} else if ((value is Boolean) && ((Boolean)value == true)) {
