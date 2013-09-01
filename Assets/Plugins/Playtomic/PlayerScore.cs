@@ -70,18 +70,18 @@ public class PlayerScore : PDictionary
 		get { return GetString ("rdate"); }
 	}
 
-	public Dictionary<string,object> fields
+	public PDictionary fields
 	{
-		get { return ContainsKey ("fields") ? (Dictionary<string,object>)this["fields"] : new Dictionary<string,object>();	}
+		get { return GetDictionary("fields"); }
 		set { SetProperty ("fields", value); }
 	}
 
-	public Dictionary<string,object> filters
+	public PDictionary filters
 	{
-		get { return ContainsKey ("filters") ? (Dictionary<string,object>)this["filters"] : new Dictionary<string,object>();	}
+		get { return GetDictionary("filters"); }
 		set { SetProperty ("filters", value); }
 	}
-	
+
 	public bool highest
 	{
 		get { return ContainsKey ("highest") && (bool) this["highest"]; }

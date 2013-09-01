@@ -8,7 +8,6 @@ public class GameVar : PDictionary
 	
 	public GameVar(Dictionary<string,object> data): base(data) {}
 	
-	
 	public string name
 	{
 		get { return GetString ("name"); }

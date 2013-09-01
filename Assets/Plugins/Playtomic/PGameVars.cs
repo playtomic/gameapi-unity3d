@@ -23,32 +23,7 @@ public class PGameVars
 	public void Load<T>(Action<Dictionary<string,T>, PResponse> callback) where T : GameVar, new()
 	{
 		
-		Playtomic.API.StartCoroutine(SendRequest(SECTION, LOAD,
-			
-			delegate(Dictionary<string,object> results, PResponse response)
-			{
-				
-				Dictionary<string,T> gameVars = new Dictionary<string,T>();
-				
-				if (response.success)
-				{
-					foreach(string key in results.Keys)
-					{
-					
-						if (results[key] is Dictionary<string,object>)
-						{
-						
-							gameVars.Add( key , (T) Activator.CreateInstance(typeof(T), new object[] { results[key] }) );
-						
-						}
-				
-					}
-				
-				}
-			
-				callback(gameVars, response);
-				
-			}));
+		Playtomic.API.StartCoroutine(SendRequest<T>(SECTION, LOAD,callback));
 		
 	}
 	
@@ -60,38 +35,46 @@ public class PGameVars
 			{"name", name}
 		};
 		
-		Playtomic.API.StartCoroutine(SendRequest(SECTION, LOADSINGLE,
-			
-			delegate(Dictionary<string,object> result, PResponse response)
-			{
-			
-				T gameVar = null;
-			
-				if (result != null)
-				{
-			
-					if (result.ContainsKey(name))
-					{
-					
-						gameVar = (T) Activator.CreateInstance(typeof(T), new object[] { result[name] });
-					
-					}
-				
-				}
-			
-				if (gameVar == null)
-				{
-					gameVar = new T();
-					gameVar["name"] = gameVar["value"] = name + " not stored in GameVars";
-				}
-					
-				callback(gameVar, response);
-			
-			}, postdata));
+		Playtomic.API.StartCoroutine(SendRequest<T>(SECTION, LOADSINGLE, callback, postdata));
 		
 	}
 	
-	internal IEnumerator SendRequest(string section, string action, Action<Dictionary<string,object>, PResponse> callback, Dictionary<string,object> postdata = null)
+	internal IEnumerator SendRequest<T>(string section, string action, Action<Dictionary<string,T>, PResponse> callback) where T : GameVar, new()
+	{ 
+		var www = PRequest.Prepare (section, action, null);
+		
+		yield return www;
+		
+		var response = PRequest.Process(www);
+
+		var data = response.success ? response.json : null;
+	
+		Dictionary<string,T> gameVars = new Dictionary<string, T>();
+		
+		if (data != null)
+		{
+			
+			if (data is IDictionary)
+			{
+				
+				foreach(string key in data.Keys)
+				{
+					
+					if (data[key] is IDictionary)
+					{
+						gameVars.Add(key, (T) Activator.CreateInstance(typeof(T), new object[] { data[key] }) );		
+					}
+					
+				}
+				
+			}
+		}
+			
+		callback(gameVars, response);
+	
+	}
+	
+	internal IEnumerator SendRequest<T>(string section, string action, Action<T, PResponse> callback, Dictionary<string,object> postdata = null) where T : GameVar, new()
 	{ 
 		var www = PRequest.Prepare (section, action, postdata);
 		
@@ -101,8 +84,16 @@ public class PGameVars
 
 		var data = response.success ? response.json : null;
 	
-		callback(data, response);
+		T gameVar = new T();
 		
-		
+		if (data != null)
+		{
+			
+			gameVar = (T) Activator.CreateInstance(typeof(T), new object[] { data });
+			
+		}
+			
+		callback(gameVar, response);
+	
 	}
 }

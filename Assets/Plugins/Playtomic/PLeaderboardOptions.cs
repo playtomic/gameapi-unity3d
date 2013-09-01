@@ -17,15 +17,21 @@ public class PLeaderboardOptions : PDictionary
 		set { SetProperty("highest", value); }
 	}
 	
+	public bool lowest 
+	{
+		get { return GetBool ("lowest"); }
+		set { SetProperty("lowest", value); }
+	}
+	
 	public bool allowduplicates 
 	{
 		get { return GetBool ("allowduplicates"); }
 		set { SetProperty("allowduplicates", value); }
 	}
 	
-	public List<string> filters 
+	public PDictionary filters 
 	{
-		get { return GetList<string>("filters"); }
+		get { return GetDictionary("filters"); }
 		set { SetProperty("filters", value); }
 	}
 	

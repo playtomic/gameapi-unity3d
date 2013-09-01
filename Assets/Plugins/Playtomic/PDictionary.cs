@@ -72,6 +72,22 @@ public class PDictionary : Dictionary<string,object> {
 		return ContainsKey(s) ? this[s].ToString() : string.Empty;
 	}
 	
+	protected PDictionary GetDictionary(string s) 
+	{	
+		PDictionary dictionary = new PDictionary();
+		
+		if (ContainsKey(s))
+		{
+			
+			if (this[s] is IDictionary)
+			{
+				dictionary = (PDictionary) this[s];
+			}
+		}
+		
+		return dictionary;
+	}
+	
 	protected List<T> GetList<T>(string s) 
 	{	
 		List<T> r = new List<T>();
