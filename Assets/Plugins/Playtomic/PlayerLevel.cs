@@ -1,11 +1,11 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 
-public class PlayerLevel : Hashtable
+public class PlayerLevel : PDictionary
 {
-	public PlayerLevel()
-	{
-	}
+	
+	public PlayerLevel(): base() {}
 	
 	public PlayerLevel(IDictionary data)
 	{
@@ -94,31 +94,10 @@ public class PlayerLevel : Hashtable
 		get { return GetString ("rdate"); }
 	}
 	
-	public Hashtable fields
+	public Dictionary<string,object> fields
 	{
-		get { return ContainsKey ("fields") ? (Hashtable)this["fields"] : new Hashtable();	}
+		get { return ContainsKey ("fields") ? (Dictionary<string,object>)this["fields"] : new Dictionary<string,object>();	}
 		set { SetProperty ("fields", value); }
 	}
-		
-	private long GetLong(string s) 
-	{
-		return ContainsKey (s) ? long.Parse(this[s].ToString ()) : 0L;
-	}
-	
-	private string GetString(string s) 
-	{	
-		return ContainsKey (s) ? this[s].ToString () : null;
-	}
-	
-	private void SetProperty(string key, object value) 
-	{
-		if(ContainsKey(key))
-		{
-			this[key] = value;
-		} 
-		else 
-		{
-			Add(key, value);
-		}
-	}
+
 }

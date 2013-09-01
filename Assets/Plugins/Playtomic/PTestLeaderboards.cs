@@ -13,16 +13,16 @@ internal class PTestLeaderboards : PTest
 		const string section = "TestLeaderboards.FirstScore";
 		Debug.Log (section);
 
-		var score = new PlayerScore {
+		PlayerScore score = new PlayerScore {
 			table = "scores" + rnd,
 			playername = "person1",
 			points = 10000,
 			highest =  true,
-			fields = new Hashtable { 
+			fields = new PDictionary { 
 				{"rnd", rnd}
 			}
 		};
-		
+
 		Playtomic.Leaderboards.Save (score, r => {
 			AssertTrue(section + "#1", "Request succeeded", r.success);
 			AssertEquals(section + "#1", "No errorcode", r.errorcode, 0);
@@ -67,7 +67,7 @@ internal class PTestLeaderboards : PTest
 			points = 20000,
 			allowduplicates = true,
 			highest =  true,
-			fields = new Hashtable { 
+			fields = new PDictionary { 
 				{"rnd", rnd}
 			}
 		};
@@ -85,14 +85,14 @@ internal class PTestLeaderboards : PTest
 		const string section = "TestLeaderboards.Highscores";
 		Debug.Log (section);
 
-		var options = new Hashtable
+		PLeaderboardOptions options = new PLeaderboardOptions
 		{
-			{"table", "scores" + rnd},
-			{"highest", true},
-			{"filters", new Hashtable
-				{
-					{"rnd", rnd}
-				}
+			
+			table = "scores" + rnd,
+			highest = true,
+			filters = new PDictionary
+			{
+				{"rnd", rnd}
 			}
 		};
 		
@@ -119,17 +119,18 @@ internal class PTestLeaderboards : PTest
 		const string section = "TestLeaderboards.LowScores";
 		Debug.Log (section);
 
-		var options = new Hashtable
+		PLeaderboardOptions options = new PLeaderboardOptions
 		{
-			{"table", "scores" + rnd},
-			{"lowest", true},
-			{"perpage", 2},
-			{"filters", new Hashtable
-				{
-					{"rnd", rnd}
-				}
+			
+			table = "scores" + rnd,
+			lowest = true,
+			perpage = 2,
+			filters = new PDictionary
+			{
+				{"rnd", rnd}
 			}
 		};
+		
 		
 		Playtomic.Leaderboards.List (options, (scores, numscores, r) => {
 			scores = scores ?? new List<PlayerScore>();
@@ -153,11 +154,12 @@ internal class PTestLeaderboards : PTest
 		const string section = "TestLeaderboards.AllScores";
 		Debug.Log (section);
 
-		var options = new Hashtable
+		PLeaderboardOptions options = new PLeaderboardOptions
 		{
-			{"table", "scores" + rnd},
-			{"mode", "newest"},
-			{"perpage", 2}
+			
+			table = "scores" + rnd,
+			mode = "newest",
+			perpage = 2,
 		};
 		
 		Playtomic.Leaderboards.List (options, (scores, numscores, r) => {
@@ -182,16 +184,18 @@ internal class PTestLeaderboards : PTest
 		const string section = "TestLeaderboards.FriendsScores";
 		Debug.Log (section);
 
-		var playerids = new ArrayList(){ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" };
+		var playerids = new List<object>(){ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" };
 
 		FriendsScoresLoop (playerids, 0, () => {
 
-			var list = new Hashtable {
-				{"table", "friends" + rnd},
-				{"perpage", 3},
-				{"friendslist", new ArrayList(new [] {"1", "2", "3" })}
+			PLeaderboardOptions list = new PLeaderboardOptions
+			{
+				
+				table = "friends" + rnd,
+				perpage = 3,
+				friendslist = new List<string> { "1", "2", "3" }
 			};
-
+			
 			Playtomic.Leaderboards.List(list, (scores, numscores, r2) => {
 				scores = scores ?? new List<PlayerScore>();
 				AssertTrue(section, "Request succeeded", r2.success);
@@ -207,7 +211,7 @@ internal class PTestLeaderboards : PTest
 		});
 	}
 
-	private static void FriendsScoresLoop(ArrayList playerids, int points, Action finished)
+	private static void FriendsScoresLoop(List<object> playerids, int points, Action finished)
 	{
 		Thread.Sleep (500);
 		points += 1000;

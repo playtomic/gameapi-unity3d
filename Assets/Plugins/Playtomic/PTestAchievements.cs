@@ -15,62 +15,63 @@ internal class PTestAchievements : PTest
 
 		var achievements = new List<PlayerAchievement>();
 		achievements.Add(new PlayerAchievement(
-			new Hashtable {
+			new Dictionary<string,object> {
 				{"achievement", "Super Mega Achievement #1"},
 				{"achievementkey", "secretkey"},
 				{"playerid", "1"},
 				{"playername", "ben"},
-				{"fields", new Hashtable { 
+				{"fields", new Dictionary<string,object> { 
 					{"rnd", rnd}
 					}}
 		}));
 		achievements.Add(new PlayerAchievement(
-			new Hashtable {
+			new Dictionary<string,object> {
 			{"achievement", "Super Mega Achievement #1"},
 			{"achievementkey", "secretkey"},
 			{"playerid", "2"},
 			{"playername", "michelle"},
-			{"fields", new Hashtable { 
+			{"fields", new Dictionary<string,object> { 
 				{"rnd", rnd}
 				}}
 		}));
 		achievements.Add(new PlayerAchievement(
-			new Hashtable {
+			new Dictionary<string,object> {
 			{"achievement", "Super Mega Achievement #1"},
 			{"achievementkey", "secretkey"},
 			{"playerid", "3"},
 			{"playername", "peter"},
-			{"fields", new Hashtable { 
+			{"fields", new Dictionary<string,object> { 
 				{"rnd", rnd}
 				}}
 		}));
 		achievements.Add(new PlayerAchievement(
-			new Hashtable {
+			new Dictionary<string,object> {
 			{"achievement", "Super Mega Achievement #2"},
 			{"achievementkey", "secretkey2"},
 			{"playerid", "3"},
 			{"playername", "peter"},
-			{"fields", new Hashtable { 
+			{"fields", new Dictionary<string,object> { 
 				{"rnd", rnd}
 				}}
 		}));
 		achievements.Add(new PlayerAchievement(
-			new Hashtable {
+			new Dictionary<string,object> {
 			{"achievement", "Super Mega Achievement #2"},
 			{"achievementkey", "secretkey2"},
 			{"playerid", "2"},
 			{"playername", "michelle"},
-			{"fields", new Hashtable { 
+			{"fields", new Dictionary<string,object> { 
 				{"rnd", rnd}
 				}}
 		}));
 
 		ListLoop (section, achievements, () => {
 
-			var options = new Hashtable {
-				{"filters", new Hashtable { 
-					{"rnd", rnd }
-					}}
+			PAchievementOptions options = new PAchievementOptions {
+			
+				filters = new PDictionary{
+					{"rnd",rnd}
+				}
 			};
 
 			Playtomic.Achievements.List(options, (ach, r2) => {
@@ -109,11 +110,16 @@ internal class PTestAchievements : PTest
 		const string section = "PTestAchievements.ListWithFriends";
 		Debug.Log (section);
 
-		var options = new Hashtable {
-			{"friendslist", new ArrayList(new []{"1", "2", "3"})},
-			{"filters", new Hashtable { 
-				{"rnd", rnd }
-				}}
+
+		PAchievementOptions options = new PAchievementOptions {
+		
+			friendslist = new List<string>(new [] {"1", "2", "3"}),
+	
+			filters = new PDictionary{
+				{"rnd",rnd}
+			}
+		
+		
 		};
 
 		Playtomic.Achievements.List(options, (achievements, r) => {
@@ -141,11 +147,15 @@ internal class PTestAchievements : PTest
 		const string section = "PTestAchievements.ListWithPlayer";
 		Debug.Log (section);
 
-		var options = new Hashtable {
-			{"playerid", "1"},
-			{"filters", new Hashtable { 
-				{"rnd", rnd }
-				}}
+
+		PAchievementOptions options = new PAchievementOptions {
+		
+			playerid = "1",
+			filters = new PDictionary{
+				{"rnd",rnd}
+			}
+		
+		
 		};
 
 		Playtomic.Achievements.List(options, (achievements, r) => {
@@ -170,13 +180,18 @@ internal class PTestAchievements : PTest
 		const string section = "PTestAchievements.ListWithPlayerAndFriends";
 		Debug.Log (section);
 
-		var options = new Hashtable {
-			{"playerid", "1"}, 
-			{"friendslist", new ArrayList(new [] { "2", "3"})},
-			{"filters", new Hashtable { 
-				{"rnd", rnd }
-				}}
+		PAchievementOptions options = new PAchievementOptions {
+		
+			playerid = "1",
+						
+			filters = new PDictionary{
+				{"rnd",rnd}
+			},
+			
+			friendslist = new List<string>(new [] {"1", "2", "3"}),
+	
 		};
+		
 
 		Playtomic.Achievements.List(options, (achievements, r) => {
 			AssertTrue(section, "Request succeeded", r.success);
@@ -206,10 +221,11 @@ internal class PTestAchievements : PTest
 		const string section = "PTestAchievements.Stream";
 		Debug.Log (section);
 
-		var options = new Hashtable {
-			{"filters", new Hashtable { 
-				{"rnd", rnd }
-				}}
+		PAchievementStreamOptions options = new PAchievementStreamOptions {
+		
+			filters = new PDictionary{
+				{"rnd",rnd}
+			}
 		};
 
 		Playtomic.Achievements.Stream(options, (achievements, numachievements, r) => {
@@ -237,13 +253,14 @@ internal class PTestAchievements : PTest
 		const string section = "PTestAchievements.StreamWithFriends";
 		Debug.Log (section);
 
-		var options = new Hashtable {
-			{"group", true},
-			{"friendslist", new ArrayList(new [] {"2", "3"})},
-			{"filters", new Hashtable { 
-				{"rnd", rnd }
-				}}
+		PAchievementStreamOptions options = new PAchievementStreamOptions {
+			group = true,
+			friendslist = new List<string>(new [] {"2", "3"}),
+			filters = new PDictionary{
+				{"rnd",rnd}
+			}
 		};
+
 
 		Playtomic.Achievements.Stream(options, (achievements, numachievements, r) => {
 			AssertTrue(section, "Request succeeded", r.success);
@@ -265,13 +282,13 @@ internal class PTestAchievements : PTest
 		const string section = "PTestAchievements.StreamWithPlayerAndFriends";
 		Debug.Log (section);
 
-		var options = new Hashtable {
-			{"group", true},
-			{"playerid", "1"},
-			{"friendslist", new ArrayList(new [] { "2", "3" })},
-			{"filters", new Hashtable { 
-				{"rnd", rnd }
-				}}
+		PAchievementStreamOptions options = new PAchievementStreamOptions {
+			group = true,
+			friendslist = new List<string>(new [] {"2", "3"}),
+			playerid = "1",
+			filters = new PDictionary{
+				{"rnd",rnd}
+			}
 		};
 
 		Playtomic.Achievements.Stream(options, (achievements, numachievements, r) => {
@@ -302,7 +319,7 @@ internal class PTestAchievements : PTest
 			{"achievementkey", "secretkey"},
 			{"playerid", rnd.ToString()},
 			{"playername", "a random name " + rnd},
-			{"fields", new Hashtable {
+			{"fields", new Dictionary<string,object> {
 				{"rnd", rnd }
 				}}
 		};

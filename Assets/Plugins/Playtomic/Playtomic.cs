@@ -41,6 +41,7 @@ public class Playtomic : MonoBehaviour
 		_instance._newsletter = new PNewsletter();
 		
 		PRequest.Initialise(publickey, privatekey, apiurl);
+				
 	}
 		
 	internal static Playtomic API
