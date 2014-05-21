@@ -56,7 +56,7 @@ internal class PRequest
 		if(www == null)
 			return PResponse.GeneralError(1);
 		
-		if (www.error != null)
+		if (!String.IsNullOrEmpty(www.error))
 			return PResponse.GeneralError(www.error);
 
 		if (string.IsNullOrEmpty(www.text))
